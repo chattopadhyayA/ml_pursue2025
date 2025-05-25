@@ -1,0 +1,9 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: content/00_overview
+chapters:
+- file: content/gradient_descent
+- file: content/Neural_Network
+- file: content/notebooks
