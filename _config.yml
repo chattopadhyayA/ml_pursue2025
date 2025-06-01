@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Machine Learning for PURSUE
-author: Arghya Chattopadhyay
+author: ""
 logo: Machine_LOGO.png
 
 # Force re-execution of notebooks on each build.
@@ -21,8 +21,8 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
+  url: https://chattopadhyaya.github.io/ml_pursue2025 # Online location of your book
+  path_to_book: content/  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
@@ -30,3 +30,12 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  extra_footer: <div><i>From Rivendell to the ends of the Earth, this code is free to all who wander.</i></div>
+
+# Adding settings for the sphinx builder
+sphinx:
+        config:
+          html_show_copyright: false
+
+
+
