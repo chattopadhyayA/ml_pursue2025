@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Stat Mech &#8212; Machine Learning for PURSUE</title>
+    <title>Fundamentals of Statistics &#8212; Machine Learning for PURSUE</title>
   
   
   
@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/01_stat';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -175,18 +177,17 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="00_overview.html">
-                    Overview
+                    <span style="color:maroon"> Overview </span>
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Stat Mech</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_svm.html">SVM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_decision.html">Decision tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html">Neural Networks</a></li>
-
 
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
@@ -363,7 +364,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -374,11 +377,41 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Stat Mech</h1>
+    <h1>Fundamentals of Statistics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-function"><span style="color:maroon"> Probability distribution function </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">❓ Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-distribution">Gaussian Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-vs-probability">Likelihood vs Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-exercise">❓ Student Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms-and-distribution-approximation"><span style="color:maroon"> Histograms and Distribution Approximation </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise-entropy-and-gini-index"><span style="color:maroon"> Surprise, entropy and gini index </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise-self-information">Surprise (Self-Information)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shanon-entropy">Shanon entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-index">Gini index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -388,11 +421,364 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="stat-mech">
-<h1>Stat Mech<a class="headerlink" href="#stat-mech" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="fundamentals-of-statistics">
+<h1>Fundamentals of Statistics<a class="headerlink" href="#fundamentals-of-statistics" title="Link to this heading">#</a></h1>
 <a href="https://colab.research.google.com/github/chattopadhyayA/ml_pursue2025/blob/master/content/01_stat.ipynb" target="_blank">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a></section>
+</a><p>Before starting with the details of machine learning, let us first recap some fundamental concepts of statistics. This are the terms that you will use a lot if you stick with the business of machine learning. Machine learning is science as well as it is a form or painting, where statistics and mathematics are like the paint and stroke.</p>
+<section id="probability-distribution-function">
+<h2><span style="color:maroon"> Probability distribution function </span><a class="headerlink" href="#probability-distribution-function" title="Link to this heading">#</a></h2>
+<p>Let us first jump into the definitions of a probability distribution functions (PDF). They come in two flavours <strong>discrete</strong> and <strong>continuous</strong>. To be <em>worthy</em> of being a probability distribution both of them have obey some properties.</p>
+<blockquote>
+<div><h3 class="rubric" id="discrete-probability-distribution"><span style="color:blue"> Discrete probability distribution </span></h3>
+<p>The probability distribution of a discrete random variable is a list of probabilities associated with each of its possible outcomes. It is also sometimes called the probability mass function. Suppose a random variable <span class="math notranslate nohighlight">\(X\)</span> may take <span class="math notranslate nohighlight">\(k\)</span> different values, with the probability that <span class="math notranslate nohighlight">\(X = x_{i}\)</span> defined to be <span class="math notranslate nohighlight">\(P(X = x_{i}) = p_{i}\)</span>. Then the probabilities <span class="math notranslate nohighlight">\(p_{i}\)</span> must satisfy the following:</p>
+<p>1: 0 &lt; <span class="math notranslate nohighlight">\(p_{i}\)</span> &lt; 1 for each <span class="math notranslate nohighlight">\(i\)</span></p>
+<p>2: <span class="math notranslate nohighlight">\(p_{1} + p_{2} + ... + p_{k} = 1\)</span>.</p>
+</div></blockquote>
+<section id="binomial-distribution">
+<h3>Binomial distribution<a class="headerlink" href="#binomial-distribution" title="Link to this heading">#</a></h3>
+<p>This is the distribution where only two outcomes are possible, <em>success</em> and <em>failure</em> with probabilities <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(1-p\)</span>. Then the probability of <span class="math notranslate nohighlight">\(k\)</span> successes in <span class="math notranslate nohighlight">\(n\)</span> trials is</p>
+<div class="math notranslate nohighlight">
+\[
+P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k} ; \quad \text{where } \binom{n}{k}=\frac{n!} {(n-k)!}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">binom</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">widgets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k_highlight</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Possible number of successes</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>  <span class="c1"># PMF values</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">markerline</span><span class="p">,</span> <span class="n">stemlines</span><span class="p">,</span> <span class="n">baseline</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">markerline</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">stemlines</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Highlight one point in red</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">k_highlight</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_highlight</span><span class="p">,</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k_highlight</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;P(X=</span><span class="si">{</span><span class="n">k_highlight</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Binomial Distribution PMF (n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Successes (k)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
+    <span class="n">plot_binomial</span><span class="p">,</span>
+    <span class="n">n</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Trials (n)&#39;</span><span class="p">),</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Success Prob (p)&#39;</span><span class="p">),</span>
+    <span class="n">k_highlight</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;k Highlight&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "af56020fccc94632ba34cf1037be15f9", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_binomial(n, p, k_highlight)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise">
+<h3>❓ Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p><strong>Q1:</strong> For a binomial distribution with <span class="math notranslate nohighlight">\(n = 30\)</span>, and success probability of <span class="math notranslate nohighlight">\(p=0.5\)</span>, what is the probability of getting <span class="math notranslate nohighlight">\(10\)</span> successes?</p>
+<details>
+<summary>Click to show answer</summary>
+<p>Answer: The result is <span class="math notranslate nohighlight">\(0.02798\)</span>. You can check this by using the function <em>binom.pmf(10, 30, 0.5)</em>.</p>
+</details>
+</section>
+<section id="id1">
+<h3>❓ Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p><strong>Q2:</strong> When is the binomial distribution most symmetric?</p>
+<details>
+<summary>Click to show answer</summary>
+<p>Answer: A binomial distribution is most symmetric when <span class="math notranslate nohighlight">\(p = 0.5\)</span>.</p>
+</details><blockquote>
+<div><h3 class="rubric" id="continuous-probability-distribution"><span style="color:blue"> Continuous probability distribution </span></h3>
+<p>As the name suggests in this case the outcomes can take any continuos value. In this case one can only talk about outcomes between some number to another. For example, in this case it is fare to ask the question what is probability of some random outcome <span class="math notranslate nohighlight">\(x\)</span>, to be in the range <span class="math notranslate nohighlight">\((a,b)\)</span>. The curve, which represents a function <span class="math notranslate nohighlight">\(p(x)\)</span>, must satisfy the following:</p>
+<p>1: The curve has no negative values (<span class="math notranslate nohighlight">\(p(x) &gt; 0\)</span> for all values of <span class="math notranslate nohighlight">\(x\)</span>).</p>
+<p>2: The total area under the curve is equal to <span class="math notranslate nohighlight">\(1\)</span>.</p>
+</div></blockquote>
+<section id="gaussian-distribution">
+<h4>Gaussian Distribution<a class="headerlink" href="#gaussian-distribution" title="Link to this heading">#</a></h4>
+<p>The Gaussian or normal distribution, is something you will find everywhere in Data science. Sometimes this is one of the assumptions for many data science algorithms too.</p>
+<p>A normal distribution has a bell-shaped density curve described by its mean <span class="math notranslate nohighlight">\(μ\)</span> and standard deviation <span class="math notranslate nohighlight">\(σ\)</span>. The density curve is symmetrical, centered about its mean, with its spread determined by its standard deviation showing that data near the mean are more frequent in occurrence than data far from the mean. The probability distribution function of a normal density curve with mean <span class="math notranslate nohighlight">\(μ\)</span> and standard deviation <span class="math notranslate nohighlight">\(σ\)</span> at a given point <span class="math notranslate nohighlight">\(x\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
+\]</div>
+<p>For more mathematically oriented people, you can plug into this distribution and confirm</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\int xf(x) dx=\mu\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int (x-\mu)^2 f(x) dx =\sigma^2\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">8</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> 
+    <span class="c1">#plt.ylim(0, 20)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gaussian Distribution&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">plot_normal</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">sigma</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ba7a1f92b73e4b138bfba6789f495216", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_normal(mu, sigma)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="likelihood-vs-probability">
+<h3>Likelihood vs Probability<a class="headerlink" href="#likelihood-vs-probability" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Probability</strong>: Given parameters, what’s the chance of observing the data?</p></li>
+<li><p><strong>Likelihood</strong>: Given data, how likely are the parameters?</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<ul class="simple">
+<li><p>Probability: “Given (p=0.7), what’s the probability of 3 heads in 5 tosses?”</p></li>
+<li><p>Likelihood: “Given 3 heads in 5 tosses, what is the most likely value of (p)?”</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Likelihood visualization</span>
+<span class="n">obs_heads</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">total_flips</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">likelihoods</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">,</span> <span class="n">total_flips</span><span class="p">,</span> <span class="n">p_vals</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_vals</span><span class="p">,</span> <span class="n">likelihoods</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Likelihood Function&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Likelihood&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d5549715c9f4460916e86e3aab9dea72d7bd944268cb22ea40822745d0e56c22.png" src="../_images/d5549715c9f4460916e86e3aab9dea72d7bd944268cb22ea40822745d0e56c22.png" />
+</div>
+</div>
+</section>
+<section id="student-exercise">
+<h3>❓ Student Exercise<a class="headerlink" href="#student-exercise" title="Link to this heading">#</a></h3>
+<p><strong>Q3:</strong> Given <span class="math notranslate nohighlight">\(8\)</span> heads out of <span class="math notranslate nohighlight">\(10\)</span> tosses, sketch or estimate the maximum likelihood estimate (MLE) for <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<details>
+<summary>Click to show answer</summary>
+<p>Answer: The MLE for <span class="math notranslate nohighlight">\(p\)</span> is <span class="math notranslate nohighlight">\(\frac{8}{10} = 0.8\)</span>. This is just basically the probability of having <span class="math notranslate nohighlight">\(8\)</span> heads out of <span class="math notranslate nohighlight">\(10\)</span> tosses. From the plot above the mode (the value that appears most frequently, in this case the peak of the curve) of the plot is the probability.</p>
+</details></section>
+</section>
+<section id="histograms-and-distribution-approximation">
+<h2><span style="color:maroon"> Histograms and Distribution Approximation </span><a class="headerlink" href="#histograms-and-distribution-approximation" title="Link to this heading">#</a></h2>
+<p>A histogram approximates the probability distribution of data. With more samples, it resembles the true distribution.</p>
+<p><strong>Key Concepts:</strong></p>
+<ul class="simple">
+<li><p>Histogram shape depends on sample size and bin width.</p></li>
+<li><p>More data yields smoother distribution.</p></li>
+<li><p>For HEP most of the time we will be looking at histograms or observed results from the detector. <strong>The target of ML in this case is basically to find a function to fit this emperical distribution.</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span> 
+
+    <span class="c1"># A kernel density estimate (KDE) plot is a method for visualizing the distribution </span>
+    <span class="c1"># of observations in a dataset, analogous to a histogram. KDE represents the data </span>
+    <span class="c1"># using a continuous probability density curve in one or more dimensions.</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Histogram with N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3c136a358a231cfca0337370c0e27f56039a01a1441e1d373a6864530d088785.png" src="../_images/3c136a358a231cfca0337370c0e27f56039a01a1441e1d373a6864530d088785.png" />
+<img alt="../_images/0bf6c41c4929928ab1c78543f4aa09204e6944dd3abae4763d669d1ee9e90e42.png" src="../_images/0bf6c41c4929928ab1c78543f4aa09204e6944dd3abae4763d669d1ee9e90e42.png" />
+<img alt="../_images/d64bb4311f10af2b4782b294c8c45b3bcdcee0a39a43761abf561257d88cad1a.png" src="../_images/d64bb4311f10af2b4782b294c8c45b3bcdcee0a39a43761abf561257d88cad1a.png" />
+<img alt="../_images/754280b6a5ac682faf08cfb7f7ef20d433dabb68066d65e799e064498de64100.png" src="../_images/754280b6a5ac682faf08cfb7f7ef20d433dabb68066d65e799e064498de64100.png" />
+</div>
+</div>
+<section id="id2">
+<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p><strong>Q4:</strong> Why does the histogram with <span class="math notranslate nohighlight">\(N=10\)</span> look so different from <span class="math notranslate nohighlight">\(N=10000\)</span>?</p>
+<details>
+<summary>Click to show answer</summary>
+<p>Answer: With <span class="math notranslate nohighlight">\(N=10\)</span>, there are too few samples to capture the underlying distribution, resulting in high variance and noise.</p>
+</details></section>
+</section>
+<section id="surprise-entropy-and-gini-index">
+<h2><span style="color:maroon"> Surprise, entropy and gini index </span><a class="headerlink" href="#surprise-entropy-and-gini-index" title="Link to this heading">#</a></h2>
+<section id="surprise-self-information">
+<h3>Surprise (Self-Information)<a class="headerlink" href="#surprise-self-information" title="Link to this heading">#</a></h3>
+<p>Surprise is the measurement of how “unexpected” an event is. Therefore, the more probable the event is, the less surprising it should be. Mathematically for a event with probability <span class="math notranslate nohighlight">\(p\)</span> it could have been <span class="math notranslate nohighlight">\(\frac{1}{p}\)</span>, but to allow “zero” surprise for certain event, the surprise (or self-information) is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+I(p)= -\log_2(p)
+\]</div>
+</section>
+<section id="shanon-entropy">
+<h3>Shanon entropy<a class="headerlink" href="#shanon-entropy" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Entropy is the <strong>average surprise</strong> across all possible outcomes.</p></li>
+<li><p>For a random variable <span class="math notranslate nohighlight">\(X\)</span> with outcomes <span class="math notranslate nohighlight">\(x_i\)</span> and probabilities <span class="math notranslate nohighlight">\(p_i\)</span>, Shanon entropy is defined as
+$<span class="math notranslate nohighlight">\(
+S(X)=-\sum_i p_i\log_2(pi)
+\)</span>$</p></li>
+<li><p>Higher entropy –&gt; more uncertainty; lower entropy –&gt; less uncertainty</p></li>
+</ul>
+</section>
+<section id="gini-index">
+<h3>Gini index<a class="headerlink" href="#gini-index" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Taking <span class="math notranslate nohighlight">\(\log\)</span> is computationally more taxing and therefore most of the times we use different other functions or formulas to quantify same thing as entropy.</p></li>
+<li><p>To measure the <strong>impurity</strong> of a dataset, we use Gini index as
+$<span class="math notranslate nohighlight">\(
+Gini(D)=1-\sum_{i=1}^C p_i^2
+\)</span>$</p></li>
+<li><p>Where, <span class="math notranslate nohighlight">\(C\)</span> is the number of unique classes in the dataset. <span class="math notranslate nohighlight">\(p_i\)</span> is the proportion of data sample belonging to class <span class="math notranslate nohighlight">\(i\)</span> in the Dataset <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><strong>Q5:</strong> If all samples belong to same class, then what is the Gini index?</p>
+<details>
+<summary>Click to show answer</summary>
+<p>Answer: It should be <span class="math notranslate nohighlight">\(1-1=0\)</span></p>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span> 
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_surprise</span><span class="p">(</span><span class="n">probability</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the surprise (negative log probability) for a given event.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">probability</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>  <span class="c1"># Handle the case where probability is zero to avoid log(0) error</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probability</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_gini</span><span class="p">(</span><span class="n">probabilities</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the Gini index of a probability distribution.&quot;&quot;&quot;</span>
+    <span class="n">gini</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">:</span>
+        <span class="n">gini</span> <span class="o">-=</span> <span class="n">probability</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">gini</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_entropy</span><span class="p">(</span><span class="n">probabilities</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the entropy of a probability distribution.&quot;&quot;&quot;</span>
+    <span class="n">entropy</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">probability</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Handle the case where probability is zero to avoid log(0) error</span>
+            <span class="n">entropy</span> <span class="o">-=</span> <span class="n">probability</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probability</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">entropy</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">visualize_surprise_and_entropy</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Surprise and Entropy&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Visualizes surprise and entropy for different probability distributions.&quot;&quot;&quot;</span>
+    <span class="n">n_colors</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="s1">&#39;brown&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">,</span> <span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">]</span>  <span class="c1"># Add more colors if needed</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Plot Surprise</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Surprise (Negative Log Probability)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_colors</span><span class="p">),</span> <span class="p">[</span><span class="n">calculate_surprise</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[:</span><span class="n">n_colors</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Color (Event)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Surprise&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Plot Entropy</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Entropy&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Color </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_colors</span><span class="p">)],</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">140</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Entropy&quot;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probabilities_1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The entropy in this case: </span><span class="si">% .2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">calculate_entropy</span><span class="p">(</span><span class="n">probabilities_1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Gini index: </span><span class="si">% .2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">calculate_gini</span><span class="p">(</span><span class="n">probabilities_1</span><span class="p">))</span>
+<span class="n">visualize_surprise_and_entropy</span><span class="p">(</span><span class="n">probabilities_1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;High Entropy, Low Surprise (Equal Probabilities)&quot;</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  1.61
+The Gini index:  0.80
+</pre></div>
+</div>
+<img alt="../_images/9f93ffa0ffe5cf6b4d70aa900aa20819953392dc53d510cead34c8b03c0d35f9.png" src="../_images/9f93ffa0ffe5cf6b4d70aa900aa20819953392dc53d510cead34c8b03c0d35f9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Unequal probabilities (lower entropy, higher surprise for rarer events)</span>
+<span class="n">probabilities_2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The entropy in this case: </span><span class="si">% .2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">calculate_entropy</span><span class="p">(</span><span class="n">probabilities_2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Gini index: </span><span class="si">% .2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">calculate_gini</span><span class="p">(</span><span class="n">probabilities_2</span><span class="p">))</span>
+<span class="n">visualize_surprise_and_entropy</span><span class="p">(</span><span class="n">probabilities_2</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Low Entropy, High Surprise (Unequal Probabilities)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  1.01
+The Gini index:  0.48
+</pre></div>
+</div>
+<img alt="../_images/a8ea00957ac29e23f3265429b6b326a79302ff7281a537f5b4325d0b48c1649c.png" src="../_images/a8ea00957ac29e23f3265429b6b326a79302ff7281a537f5b4325d0b48c1649c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3: One event with high probability, others with zero (zero entropy, infinite surprise for zero probability events)</span>
+<span class="n">probabilities_3</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The entropy in this case: </span><span class="si">% .2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">calculate_entropy</span><span class="p">(</span><span class="n">probabilities_3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Gini index: </span><span class="si">% .2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">calculate_gini</span><span class="p">(</span><span class="n">probabilities_3</span><span class="p">))</span>
+<span class="n">visualize_surprise_and_entropy</span><span class="p">(</span><span class="n">probabilities_3</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Almost zero Entropy, High Surprise (One High Probability)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  0.06
+The Gini index:  0.02
+</pre></div>
+</div>
+<img alt="../_images/e3ba5cd3fa3858649cd0e97591749d2381538fe7c02c5a14cad26a432e950b45.png" src="../_images/e3ba5cd3fa3858649cd0e97591749d2381538fe7c02c5a14cad26a432e950b45.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p><strong>Q6:</strong> For different situations that you can think of, do a quantitative analysis of Gini index vs Shanon entropy.</p>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -430,7 +816,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Overview</p>
+        <p class="prev-next-title"><span style="color:maroon"> Overview </span></p>
       </div>
     </a>
     <a class="right-next"
@@ -448,6 +834,43 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-function"><span style="color:maroon"> Probability distribution function </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">❓ Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-distribution">Gaussian Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-vs-probability">Likelihood vs Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-exercise">❓ Student Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms-and-distribution-approximation"><span style="color:maroon"> Histograms and Distribution Approximation </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise-entropy-and-gini-index"><span style="color:maroon"> Surprise, entropy and gini index </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise-self-information">Surprise (Self-Information)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shanon-entropy">Shanon entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-index">Gini index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

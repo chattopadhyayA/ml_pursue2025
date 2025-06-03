@@ -1,2 +1,5 @@
 # Ignore the following files
 .DS_Store
+
+# Ignore the generated data
+content/data/

@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/00_overview';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Stat Mech" href="01_stat.html" />
+    <link rel="next" title="Fundamentals of Statistics" href="01_stat.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,18 +178,17 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Overview
+                    <span style="color:maroon"> Overview </span>
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_stat.html">Stat Mech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_stat.html">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_svm.html">SVM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_decision.html">Decision tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html">Neural Networks</a></li>
-
 
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
@@ -366,7 +365,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -377,11 +378,31 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overview</h1>
+    <h1><span style="color:maroon"> Overview </span></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:maroon"> Overview </span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aritificial-intelligence-and-machine-learning">Aritificial Intelligence and Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-machine-learning">Summary of machine learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rules-for-this-workshop">Rules for this workshop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#contents"><span style="color:maroon">Contents</span></a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -391,19 +412,99 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
-<p>This is the jupyter book in preparation for the Machine Learning course for PURSUE 2025</p>
+  <p><img alt="alt text" src="../_images/opening.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1><span style="color:maroon"> Overview </span><a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<p>This is the <strong>Machine Learning</strong> course web page for US CMS PURSUE workshop <span class="math notranslate nohighlight">\(2025\)</span>. Given our modern day use of all things electronic, <em>you can run, you can hide but you cannot escape ML</em>. From smart phones to smart toothpastes, ML is everywhere.</p>
+<p>In this course, “<em>we’re here for a good time, not a long time</em>” so let’s first learn what this course in <strong>NOT</strong> for</p>
+<ul class="simple">
+<li><p>We are not going to learn facial recognition.</p></li>
+<li><p>Not going to develop a algorithm that predicts our mood better than Youtube or Netflix.</p></li>
+<li><p>No self-driving cars here.</p></li>
+<li><p>Not even making AI driven music or art.</p></li>
+<li><p>Nor would we learn to beat Magnus Carlsen in chess.</p></li>
+<li><p>and million more things, that we are not going to learn.</p></li>
+</ul>
+<p>The main objective of this course are</p>
+<ul class="simple">
+<li><p>To introduce you to the basics of Machine learning with examples.</p></li>
+<li><p>To develop a sense of statistics/data science algorithms that goes under the hood of a ML model.</p></li>
+<li><p>Explain the terminology of machine learning.</p></li>
+<li><p>Introducing you to some <strong>Python</strong> frameworks to start building your first <em>Machine</em>.</p></li>
+<li><p>Getting familiarize with basic ML models that are although very common but can serve as a basic starting point.</p></li>
+<li><p>Getting you prepared to learn on your own once this course is over.</p></li>
+</ul>
+<p>With all these let us first have some basic motivation for learning ML in the context of our pursuit of artificial intelligence.</p>
+<section id="aritificial-intelligence-and-machine-learning">
+<h2>Aritificial Intelligence and Machine Learning<a class="headerlink" href="#aritificial-intelligence-and-machine-learning" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Aritificial intelligence leverages computers and machines to mimic the problem solving and decision making capabilities of the human mind. <br>
+<img alt="alt text" src="../_images/AI_vs_hum.png" />
+<br></p></li>
+</ul>
+<section id="machine-learning">
+<h3>Machine Learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Machine learning is more dependent on human intervention to learn. Human experts determines the hierarchy of features to understand the difference between data inputs, usually requiring more structured data to learn.</p></li>
+<li><p><strong>Deep learning</strong> in general does not require that much structuring of data and extract features without much of a human intervention. <br></p></li>
+</ul>
+<br>
+<p><img alt="alt text" src="../_images/machine_venn.png" /></p>
+<ul class="simple">
+<li><p>In <strong>classical</strong> programming, we the developers need to understand the aspect of the problem we are trying to solve, and to know exactly what all the rules are to make it to the solution</p></li>
+</ul>
+<blockquote>
+<div><p><span style="color:red"><strong>Intuitively</strong>: <strong>Machine Learning</strong> <span class="math notranslate nohighlight">\(\equiv\)</span> <strong>Learning from example</strong></span>.</p>
+</div></blockquote>
+<br>
+<p>Example: <span style="color:blue">Distinguish Squares and Circles</span></p>
+<p><img alt="alt text" src="../_images/square_circle.png" /></p>
+<br>
+<ul class="simple">
+<li><p>The standard coding algorithms that we use are constrained by statements like <em>if</em>, <em>do-while</em>, <em>for</em> etc. Even a very intelligent coder can only cover a finite number of scenarios through these.</p></li>
+</ul>
+<p>Example: <span style="color:blue"> Self driving cars </span></p>
+<p><img alt="alt text" src="../_images/self_drive.png" /></p>
+<p><span style="color:red"> <strong>What if:</strong> There is a human on a wet road and the signal in green?? </span></p>
+<blockquote>
+<div><p><span style="color:blue"> <em>Since our real world has infinite possibilities, explicit codings are not faithful or even practical</em>. </span></p>
+</div></blockquote>
+</section>
+</section>
+<section id="summary-of-machine-learning">
+<h2>Summary of machine learning<a class="headerlink" href="#summary-of-machine-learning" title="Link to this heading">#</a></h2>
+<p>In a lot of sense ML can be summarised as the following</p>
+<figure class="align-center" id="ml-meme">
+<a class="reference internal image-reference" href="../_images/ML_meme.png"><img alt="../_images/ML_meme.png" src="../_images/ML_meme.png" style="height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">“Image source: <a class="reference external" href="https://www.meme-arsenal.com/en/create/meme/1868835">https://www.meme-arsenal.com/en/create/meme/1868835</a>”</span><a class="headerlink" href="#ml-meme" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<hr class="docutils" />
+<section id="rules-for-this-workshop">
+<h3>Rules for this workshop<a class="headerlink" href="#rules-for-this-workshop" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Each of the following chapter will have a <a class="reference external" href="https://youtu.be/5LB_y-nudGU?si=MYDYvubUH8qLpm89"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a> button. Clikcing on the button will open up the Jupyter Notebook in Google Collab, where you can modify and run the files as you wish. Remember that the only way to learn is to start first.</p></li>
+<li><p>There are questions in the jupyter lab notebooks, where the answers are hidden. But a single click would unveil the answers. The workshop will work on a <em>honour-system</em>, you are not allowed to open the answers before you are told to do so.</p></li>
+</ul>
+<blockquote>
+<div><p><span style="color:red"> With all these we are now ready to proceed with the following topics.. </span></p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="contents">
+<h1><span style="color:maroon">Contents</span><a class="headerlink" href="#contents" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="01_stat.html">Stat Mech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_stat.html">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_svm.html">SVM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_decision.html">Decision tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html">Neural Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html#finding-pi">Finding <span class="math notranslate nohighlight">\(\pi\)</span></a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html#what-next">What Next?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html#id1">Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_further.html">Further Study</a></li>
@@ -446,7 +547,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stat Mech</p>
+        <p class="prev-next-title">Fundamentals of Statistics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -456,6 +557,33 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:maroon"> Overview </span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aritificial-intelligence-and-machine-learning">Aritificial Intelligence and Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-machine-learning">Summary of machine learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rules-for-this-workshop">Rules for this workshop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#contents"><span style="color:maroon">Contents</span></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
