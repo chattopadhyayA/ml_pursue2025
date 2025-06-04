@@ -185,16 +185,9 @@
 <li class="toctree-l1"><a class="reference internal" href="01_stat.html">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_decision.html">Decision tree</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="04_svm.html">Support Vector Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Neural Networks</a></li>
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_further.html">Further Study</a></li>
@@ -394,31 +387,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Neural Networks</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#human-brains-are-amazing-can-we-mimic-that">Human Brains are amazing can we mimic that??</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Neural Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-neural-network-from-scratch"><span style="color:maroon"> A neural network from scratch </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pytorch">Using PyTorch</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-model">Defining the Model</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Neural Networks</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-neural-network-from-scratch"><span style="color:maroon"> A neural network from scratch </span></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pytorch">Using PyTorch</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-model">Defining the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#over-fitting-vs-under-fitting">Over-fitting vs Under-fitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-under-fitting">Illustrating Under-fitting</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-over-fitting">Illustrating Over-fitting</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-fitting-vs-under-fitting">Over-fitting vs Under-fitting</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-under-fitting">Illustrating Under-fitting</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-over-fitting">Illustrating Over-fitting</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-early-stopping">Adding Early Stopping</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-early-stopping">Adding Early Stopping</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -429,7 +418,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="neural-networks">
+  <section class="tex2jax_ignore mathjax_ignore" id="neural-networks">
 <h1>Neural Networks<a class="headerlink" href="#neural-networks" title="Link to this heading">#</a></h1>
 <a href="https://colab.research.google.com/github/chattopadhyayA/ml_pursue2025/blob/master/content/06_NN_basic.ipynb" target="_blank">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -523,9 +512,8 @@ each with a varied strength of connection. <br></p></li>
 </div>
 </div>
 </section>
-</section>
 <section id="id1">
-<h1>Neural Networks<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h2>Neural Networks<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>For each neuron, we define three properties</p>
 <ol class="arabic simple">
@@ -551,7 +539,7 @@ each with a varied strength of connection. <br></p></li>
 </figure>
 </section>
 <section id="implementation">
-<h1>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h1>
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <p>There are several popular python packages for implementing neural networks like <strong>Tensorflow</strong>, <strong>Pytorch</strong> etc. In this course we will only focus on <strong>Pytorch</strong>. In all the packages, the core ideas remains the same</p>
 <ol class="arabic">
 <li><p><strong>Feed-Forward</strong></p>
@@ -590,7 +578,7 @@ where \)</span>\alpha$ is the learning rate.</p></li>
 </ol>
 </section>
 <section id="a-neural-network-from-scratch">
-<h1><span style="color:maroon"> A neural network from scratch </span><a class="headerlink" href="#a-neural-network-from-scratch" title="Link to this heading">#</a></h1>
+<h2><span style="color:maroon"> A neural network from scratch </span><a class="headerlink" href="#a-neural-network-from-scratch" title="Link to this heading">#</a></h2>
 <p>In this case we are writing a neural network just using <em>numpy</em>. and observing the outputs using <em>matplotlib</em>. The first job is always to call required libraries</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -815,7 +803,7 @@ where \)</span>\alpha$ is the learning rate.</p></li>
 </div>
 </div>
 <section id="using-pytorch">
-<h2>Using PyTorch<a class="headerlink" href="#using-pytorch" title="Link to this heading">#</a></h2>
+<h3>Using PyTorch<a class="headerlink" href="#using-pytorch" title="Link to this heading">#</a></h3>
 <p>We will now learn implementing the above steps in PyTorch by fitting a simple dataset where
 $<span class="math notranslate nohighlight">\(
 y= 0.1 x^3 - 0.5 x^2 + 2 \sin(3x),\quad x \in [-2,2]
@@ -873,7 +861,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 </div>
 </div>
 <section id="defining-the-model">
-<h3>Defining the Model<a class="headerlink" href="#defining-the-model" title="Link to this heading">#</a></h3>
+<h4>Defining the Model<a class="headerlink" href="#defining-the-model" title="Link to this heading">#</a></h4>
 <p>We define a simple feed‐forward network SimpleNet with one hidden layer of size <span class="math notranslate nohighlight">\(32\)</span> and <em>ReLU</em> activation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -898,7 +886,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 </section>
 </section>
 <section id="exercise">
-<h2>❓ Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<h3>❓ Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p><strong>Q5:</strong> What is the total number of trainable parametrs for the above network?</p>
 <details>
 <summary>Click to show answer</summary>
@@ -1016,13 +1004,13 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 </div>
 </div>
 <section id="over-fitting-vs-under-fitting">
-<h3>Over-fitting vs Under-fitting<a class="headerlink" href="#over-fitting-vs-under-fitting" title="Link to this heading">#</a></h3>
+<h4>Over-fitting vs Under-fitting<a class="headerlink" href="#over-fitting-vs-under-fitting" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><strong>Under-fitting</strong> occurs when both training and validation error remain high– <em>your model is too simple</em>.</p></li>
 <li><p><strong>Over-fitting</strong> occurs when training error is low but validation error rises —- <em>your model is too complex or trained too long</em>.</p></li>
 </ul>
 <section id="illustrating-under-fitting">
-<h4>Illustrating Under-fitting<a class="headerlink" href="#illustrating-under-fitting" title="Link to this heading">#</a></h4>
+<h5>Illustrating Under-fitting<a class="headerlink" href="#illustrating-under-fitting" title="Link to this heading">#</a></h5>
 <p>Train with only 5 epochs—the network hasn’t had enough time to capture the sine pattern.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1044,7 +1032,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 </ul>
 </section>
 <section id="illustrating-over-fitting">
-<h4>Illustrating Over-fitting<a class="headerlink" href="#illustrating-over-fitting" title="Link to this heading">#</a></h4>
+<h5>Illustrating Over-fitting<a class="headerlink" href="#illustrating-over-fitting" title="Link to this heading">#</a></h5>
 <p>Increase capacity to 512 hidden units and train for 500 epochs—the model will “memorize” evrything.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1079,7 +1067,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 </section>
 </section>
 <section id="adding-early-stopping">
-<h3>Adding Early Stopping<a class="headerlink" href="#adding-early-stopping" title="Link to this heading">#</a></h3>
+<h4>Adding Early Stopping<a class="headerlink" href="#adding-early-stopping" title="Link to this heading">#</a></h4>
 <p>Finally, we demonstrate early stopping on the large model: we’ll monitor validation loss and halt training if it fails to improve for 10 consecutive epochs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1100,6 +1088,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 <img alt="../_images/bf15289f79f3078fd045168f6bb2b428d1d2abab9189d494b56ecb22c6213d76.png" src="../_images/bf15289f79f3078fd045168f6bb2b428d1d2abab9189d494b56ecb22c6213d76.png" />
 </div>
 </div>
+</section>
 </section>
 </section>
 </section>
@@ -1168,31 +1157,27 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Neural Networks</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#human-brains-are-amazing-can-we-mimic-that">Human Brains are amazing can we mimic that??</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Neural Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-neural-network-from-scratch"><span style="color:maroon"> A neural network from scratch </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pytorch">Using PyTorch</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-model">Defining the Model</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Neural Networks</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-neural-network-from-scratch"><span style="color:maroon"> A neural network from scratch </span></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pytorch">Using PyTorch</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-model">Defining the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#over-fitting-vs-under-fitting">Over-fitting vs Under-fitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-under-fitting">Illustrating Under-fitting</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-over-fitting">Illustrating Over-fitting</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-fitting-vs-under-fitting">Over-fitting vs Under-fitting</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-under-fitting">Illustrating Under-fitting</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-over-fitting">Illustrating Over-fitting</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-early-stopping">Adding Early Stopping</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-early-stopping">Adding Early Stopping</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-
   </nav></div>
 
 </div></div>

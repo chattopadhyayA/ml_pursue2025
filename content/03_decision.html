@@ -193,16 +193,9 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l1"><a class="reference internal" href="01_stat.html">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Decision tree</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="04_svm.html">Support Vector Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html">Neural Networks</a></li>
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_further.html">Further Study</a></li>
@@ -402,26 +395,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decision tree</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept">Concept</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-modules-that-will-do-all-the-work">Import the modules that will do all the work</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data">Import the data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-identifying-missing-data">Missing Data: Identifying Missing Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-modules-that-will-do-all-the-work">Import the modules that will do all the work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data">Import the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-identifying-missing-data">Missing Data: Identifying Missing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-formatting">Data formatting</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-classification-tree">Build A Classification Tree</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-classification-tree">Build A Classification Tree</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-tree-learn">How does a tree “learn”?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips">Tips</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -478,9 +463,8 @@ document.write(`
 </figure>
 <p>In this lesson we will be carefull and use the data very carefully</p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="import-the-modules-that-will-do-all-the-work">
-<h1>Import the modules that will do all the work<a class="headerlink" href="#import-the-modules-that-will-do-all-the-work" title="Link to this heading">#</a></h1>
+<section id="import-the-modules-that-will-do-all-the-work">
+<h2>Import the modules that will do all the work<a class="headerlink" href="#import-the-modules-that-will-do-all-the-work" title="Link to this heading">#</a></h2>
 <p>The very first thing we do is load in a bunch of python modules. Python, itself, just gives us a basic programming language. These modules give us extra functionality to import the data, clean it up and format it, and then build, evaluate and draw the classification tree.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -497,10 +481,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p><a id="download-the-data"></a></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="import-the-data">
-<h1>Import the data<a class="headerlink" href="#import-the-data" title="Link to this heading">#</a></h1>
+<section id="import-the-data">
+<h2>Import the data<a class="headerlink" href="#import-the-data" title="Link to this heading">#</a></h2>
 <p>Now we load in a dataset from the <strong><a class="reference external" href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning Repository</a></strong>.
 Specifically, we are going to use the <strong><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Heart+Disease">Heart Disease Dataset</a></strong>. This dataset will allow us to predict if someone has heart disease based on their sex, age, blood pressure and a variety of other metrics.</p>
 <p>When <strong>pandas</strong> (<strong>pd</strong>) reads in data, it returns a <strong>dataframe</strong>, which is a lot like a spreadsheet. The data are organized in rows and columns and each row can contain a mixture of text and numbers. The standard variable name for a <strong>dataframe</strong> is the initials <strong>df</strong>, and that is what we will use here:</p>
@@ -806,8 +789,8 @@ Specifically, we are going to use the <strong><a class="reference external" href
 </div></div></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="missing-data-identifying-missing-data">
-<h1>Missing Data: Identifying Missing Data<a class="headerlink" href="#missing-data-identifying-missing-data" title="Link to this heading">#</a></h1>
+<section id="missing-data-identifying-missing-data">
+<h2>Missing Data: Identifying Missing Data<a class="headerlink" href="#missing-data-identifying-missing-data" title="Link to this heading">#</a></h2>
 <p>Unfortunately, the biggest part of any data analysis project is making sure that the data is correctly formatted and fixing it when it is not. The first part of this process is identifying and dealing with <strong>Missing Data</strong>.</p>
 <p><strong>Missing Data</strong> is simply a blank space, or a surrogate value like <strong>NA</strong>, that indicates that we failed to collect data for one of the features.</p>
 <p>There are two main ways to deal with missing data:</p>
@@ -1063,6 +1046,7 @@ dtype: object
 </div>
 </div>
 <p><strong>Verify that now we do not have anything missing inside df_no_missing</strong></p>
+</section>
 <section id="data-formatting">
 <h2>Data formatting<a class="headerlink" href="#data-formatting" title="Link to this heading">#</a></h2>
 <p>Now we have no missing elements in the data, so we can format it like we need it. Here we will make “hd” as the target space (Y) and rest of the data as X.</p>
@@ -1672,9 +1656,8 @@ dtype: object
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="build-a-classification-tree">
-<h1>Build A Classification Tree<a class="headerlink" href="#build-a-classification-tree" title="Link to this heading">#</a></h1>
+<section id="build-a-classification-tree">
+<h2>Build A Classification Tree<a class="headerlink" href="#build-a-classification-tree" title="Link to this heading">#</a></h2>
 <p>At long last, the data are correctly formatted for making a <strong>Classification Tree</strong>. Now we simply split the data into <strong>training</strong> and <strong>testing</strong> sets and build the tree.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1863,6 +1846,7 @@ F1 Score: 0.8325
 <img alt="../_images/8d0ffc1c65be599b1639f153b4ee2632bb0578e69551834bc3f76a766b1a59a4.png" src="../_images/8d0ffc1c65be599b1639f153b4ee2632bb0578e69551834bc3f76a766b1a59a4.png" />
 </div>
 </div>
+</section>
 <section id="how-does-a-tree-learn">
 <h2>How does a tree “learn”?<a class="headerlink" href="#how-does-a-tree-learn" title="Link to this heading">#</a></h2>
 <p>Now we can ask the question, how is the tree getting trained? While at first it might seem somewhat mysterious when you think about it, how the model actually trains is relatively straight forward, and it comes down to a common theme in ML: the minimization/maximization of some metric guiding an iterative training process. Let’s see how a tree is trained to get a understanding.</p>
@@ -1972,26 +1956,18 @@ F1 Score: 0.8325
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decision tree</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept">Concept</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-modules-that-will-do-all-the-work">Import the modules that will do all the work</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data">Import the data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-identifying-missing-data">Missing Data: Identifying Missing Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-modules-that-will-do-all-the-work">Import the modules that will do all the work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data">Import the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-identifying-missing-data">Missing Data: Identifying Missing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-formatting">Data formatting</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-classification-tree">Build A Classification Tree</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-classification-tree">Build A Classification Tree</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-tree-learn">How does a tree “learn”?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips">Tips</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
