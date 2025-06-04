@@ -57,10 +57,18 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/02_MLintro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="SVM" href="03_svm.html" />
+    <link rel="next" title="Decision tree" href="03_decision.html" />
     <link rel="prev" title="Fundamentals of Statistics" href="01_stat.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,14 +190,21 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_stat.html">Fundamentals of Statistics</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">ML Intro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_svm.html">SVM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_decision.html">Decision tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_decision.html">Decision tree</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_svm.html">Support Vector Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html">Neural Networks</a></li>
+
+
 
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_further.html">Further Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_MLforHEP.html">ML for HEP</a></li>
 </ul>
 
     </div>
@@ -362,7 +377,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -378,6 +395,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-imitation-game"><span style="color:maroon"> The Imitation Game </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-classification">Machine Learning Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-regression">Machine Learning Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#different-types-of-ml"><span style="color:maroon"> Different Types of ML </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -391,7 +424,114 @@ document.write(`
 <h1>ML Intro<a class="headerlink" href="#ml-intro" title="Link to this heading">#</a></h1>
 <a href="https://colab.research.google.com/github/chattopadhyayA/ml_pursue2025/blob/master/content/02_MLintro.ipynb" target="_blank">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a></section>
+</a><section id="the-imitation-game">
+<h2><span style="color:maroon"> The Imitation Game </span><a class="headerlink" href="#the-imitation-game" title="Link to this heading">#</a></h2>
+<p>The imitation game or the Turing test refers to a test for assesing <em>machine intelligence</em>, proposed by the British mathematician and computer scientist Alan Turing in 1950.</p>
+<blockquote>
+<div><p>The test is designed to asses a machine’s ability to exhibit intelligent behaviour equivalent to, or indistinguishable from that of a human.<br></p>
+</div></blockquote>
+<figure class="align-center" id="imitation">
+<a class="reference internal image-reference" href="../_images/imitation.png"><img alt="../_images/imitation.png" src="../_images/imitation.png" style="height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">“Try this game with ChatGPT/DeepSeek”</span><a class="headerlink" href="#imitation" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Machine Learning:</strong> Quite crudely, machine learning can be thought of as a collection of tools and techniques that transforms data into decisions (hopefully good!!) by making some form of <strong>classification</strong>, like whether or not someone likes pineapple pizza, or some form of <strong>quantitavive predictions</strong>, like how long can someone run.</p></li>
+</ul>
+<section id="machine-learning-classification">
+<h3>Machine Learning Classification<a class="headerlink" href="#machine-learning-classification" title="Link to this heading">#</a></h3>
+<p>One excellent example of classification is the classification tree itself. We will learn more about them soon.</p>
+<pre  class="mermaid">
+        graph TD
+    B[&quot;Do you know about decision trees?&quot;]
+    B -- Yes --&gt; C[&quot;Have you implemented decision trees?&quot;]
+    C -- Yes --&gt; D[&quot;Do not read&quot;]
+    C -- No --&gt; E[&quot;Read&quot;]
+    B -- No --&gt; F[&quot;Do you want to learn?&quot;]
+    F -- Yes --&gt; G[&quot;Read&quot;]
+    F -- No --&gt; H[&quot;Do not read.&quot;]
+    </pre></section>
+<section id="machine-learning-regression">
+<h3>Machine Learning Regression<a class="headerlink" href="#machine-learning-regression" title="Link to this heading">#</a></h3>
+<p>Suppose we have a pile of Shoe-size vs Height data, and we want to make some predictions.</p>
+<figure class="align-center" id="lin-reg">
+<a class="reference internal image-reference" href="../_images/lin_reg.png"><img alt="../_images/lin_reg.png" src="../_images/lin_reg.png" style="height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">“Example: Linear Regression”</span><a class="headerlink" href="#lin-reg" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="different-types-of-ml">
+<h2><span style="color:maroon"> Different Types of ML </span><a class="headerlink" href="#different-types-of-ml" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Supervised ML</strong></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Linear Regression</p></li>
+<li><p>Logistic Regression</p></li>
+<li><p>k-nearest neighbors (k-NN)</p></li>
+<li><p>Support Vector Machine</p></li>
+<li><p><strong>Decision tree</strong></p></li>
+<li><p><strong>Neural Networks</strong></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Unsupervised ML</strong></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Density estimation</p></li>
+<li><p>Clustering maps</p></li>
+<li><p>Dimensionality reduction</p></li>
+<li><p>Outlier detection</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Re-inforcement Learning</strong></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Deep-Q learning</p></li>
+<li><p>Self-driving car</p></li>
+</ul>
+</div></blockquote>
+<section id="exercise">
+<h3>❓ Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p><strong>Q7:</strong> How to stop the Green Squiggle from being the final answer??</p>
+<figure class="align-center" id="wrong-reg">
+<a class="reference internal image-reference" href="../_images/wrong_reg.png"><img alt="../_images/wrong_reg.png" src="../_images/wrong_reg.png" style="height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">“Wrong Regression”</span><a class="headerlink" href="#wrong-reg" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<details>
+<summary>Click to show answer</summary>
+<p>Answer: Add some testing point. If the green squiggle is the final answer then the prediction do will do worse for testing points.</p>
+<figure class="align-center" id="test-reg">
+<a class="reference internal image-reference" href="../_images/test_reg.png"><img alt="../_images/test_reg.png" src="../_images/test_reg.png" style="height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">“Correcting Regression”</span><a class="headerlink" href="#test-reg" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</details>
+<hr class="docutils" />
+<h4>
+<center>
+<blockquote>
+<div><p><span style="color:Blue"> There are tons of fancy machine learning method and architectures available, like <strong>Deep Learning Convolutional Neural Networks</strong> and what not!!, and each month something new and exciting comes along, but regardless of what we may use, the most important question is to check how it performs with <strong>Testing Data</strong>, or data that it have not seen before. </span></p>
+</div></blockquote>
+</center> </h4>
+---
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -433,11 +573,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="03_svm.html"
+       href="03_decision.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">SVM</p>
+        <p class="prev-next-title">Decision tree</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -447,6 +587,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-imitation-game"><span style="color:maroon"> The Imitation Game </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-classification">Machine Learning Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-regression">Machine Learning Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#different-types-of-ml"><span style="color:maroon"> Different Types of ML </span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

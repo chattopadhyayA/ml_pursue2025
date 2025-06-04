@@ -184,14 +184,21 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_stat.html">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_svm.html">SVM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_decision.html">Decision tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_decision.html">Decision tree</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_svm.html">Support Vector Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Neural Networks</a></li>
+
+
 
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_further.html">Further Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_MLforHEP.html">ML for HEP</a></li>
 </ul>
 
     </div>
@@ -392,10 +399,14 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation functions</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Neural Networks</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Neural Networks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-neural-network-from-scratch"><span style="color:maroon"> A neural network from scratch </span></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pytorch">Using PyTorch</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-model">Defining the Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-fitting-vs-under-fitting">Over-fitting vs Under-fitting</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-under-fitting">Illustrating Under-fitting</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-over-fitting">Illustrating Over-fitting</a></li>
@@ -524,13 +535,23 @@ each with a varied strength of connection. <br></p></li>
 </ol>
 </li>
 </ul>
-<p><img alt="alt text" src="../_images/neuron_prop.png" /></p>
-<ul class="simple">
-<li><p>Connecting different artificial neurons like this together generates a neural network</p></li>
-</ul>
-<p><img alt="alt text" src="../_images/nnetwork.png" /></p>
+<figure class="align-center" id="sing-neur">
+<a class="reference internal image-reference" href="../_images/sing_neur.png"><img alt="../_images/sing_neur.png" src="../_images/sing_neur.png" style="height: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">“Weights and bias of a sigle output neuron”</span><a class="headerlink" href="#sing-neur" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="nnetwork">
+<a class="reference internal image-reference" href="../_images/nnetwork.png"><img alt="../_images/nnetwork.png" src="../_images/nnetwork.png" style="height: 250px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">“A neural network”</span><a class="headerlink" href="#nnetwork" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<h1>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h1>
 <p>There are several popular python packages for implementing neural networks like <strong>Tensorflow</strong>, <strong>Pytorch</strong> etc. In this course we will only focus on <strong>Pytorch</strong>. In all the packages, the core ideas remains the same</p>
 <ol class="arabic">
 <li><p><strong>Feed-Forward</strong></p>
@@ -547,12 +568,16 @@ each with a varied strength of connection. <br></p></li>
 <li><p>Output propagates from input layer through hidden layers to the output.</p></li>
 </ul>
 </li>
+</ol>
+<ol class="arabic simple" start="2">
 <li><p><strong>Back-Propagation</strong></p>
 <ul class="simple">
 <li><p>Compute loss <span class="math notranslate nohighlight">\(\mathcal{L}(\hat{y},y;\theta)\)</span> where <span class="math notranslate nohighlight">\(\hat{y}\)</span> is the network output and <span class="math notranslate nohighlight">\(y\)</span> is the true output.</p></li>
 <li><p>Use the chain rule to compute <span class="math notranslate nohighlight">\(\frac{\partial \mathcal{L}}{\partial W_{ij}^{(l,l-1)}}\)</span> and <span class="math notranslate nohighlight">\(\frac{\partial \mathcal{L}}{\partial b_i^{l}}\)</span> for each layer <span class="math notranslate nohighlight">\(l\)</span>, propagating the error backward.</p></li>
 </ul>
 </li>
+</ol>
+<ol class="arabic simple" start="3">
 <li><p><strong>Gradient Descent</strong></p>
 <ul class="simple">
 <li><p>Update each parameter <span class="math notranslate nohighlight">\(\theta \in {w,b}\)</span> by
@@ -564,6 +589,231 @@ where \)</span>\alpha$ is the learning rate.</p></li>
 </li>
 </ol>
 </section>
+<section id="a-neural-network-from-scratch">
+<h1><span style="color:maroon"> A neural network from scratch </span><a class="headerlink" href="#a-neural-network-from-scratch" title="Link to this heading">#</a></h1>
+<p>In this case we are writing a neural network just using <em>numpy</em>. and observing the outputs using <em>matplotlib</em>. The first job is always to call required libraries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span> <span class="c1"># for plotting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">300</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">net_f_df_sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span> <span class="c1"># calculate f(z) and f&#39;(z)</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span> <span class="c1"># sigmoid</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">val</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># return both f and f&#39;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">net_f_df_relu</span><span class="p">(</span><span class="n">z</span><span class="p">):</span> <span class="c1"># calculate f(z) and f&#39;(z)</span>
+    <span class="n">val</span><span class="o">=</span><span class="n">z</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="n">z</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># return both f and f&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">forward_step</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="c1"># calculate values in next layer, from input y</span>
+    <span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">w</span><span class="p">)</span><span class="o">+</span><span class="n">b</span> <span class="c1"># w=weights, b=bias, performing the weighted sum</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">net_f_df_relu</span><span class="p">(</span><span class="n">z</span><span class="p">))</span> <span class="c1"># applying the activation function and returning both f and df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply_net</span><span class="p">(</span><span class="n">y_in</span><span class="p">):</span> <span class="c1"># forward pass through the network, only once</span>
+    <span class="k">global</span> <span class="n">Weights</span><span class="p">,</span> <span class="n">Biases</span><span class="p">,</span> <span class="n">NumLayers</span> <span class="c1"># Try not using global by making all of these as a single class</span>
+    <span class="k">global</span> <span class="n">y_layer</span><span class="p">,</span> <span class="n">df_layer</span> <span class="c1"># for storing y-values and df/dz values</span>
+    
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y_in</span> <span class="c1"># start with input values</span>
+    <span class="n">y_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="p">):</span> <span class="c1"># loop through all layers</span>
+        <span class="c1"># j=0 corresponds to the first layer above the input</span>
+        <span class="n">y</span><span class="p">,</span><span class="n">df</span> <span class="o">=</span> <span class="n">forward_step</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Weights</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">Biases</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="c1"># one step at a time</span>
+        <span class="n">df_layer</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span> <span class="c1"># store f&#39;(z) [needed later in backprop]</span>
+        <span class="n">y_layer</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span> <span class="c1"># store f(z) [also needed in backprop]        </span>
+    <span class="k">return</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">backward_step</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">df</span><span class="p">):</span> 
+    <span class="k">return</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">w</span><span class="p">))</span><span class="o">*</span><span class="n">df</span> <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">backprop</span><span class="p">(</span><span class="n">y_target</span><span class="p">):</span> <span class="c1"># one backward pass through the network</span>
+    <span class="k">global</span> <span class="n">y_layer</span><span class="p">,</span> <span class="n">df_layer</span><span class="p">,</span> <span class="n">Weights</span><span class="p">,</span> <span class="n">Biases</span><span class="p">,</span> <span class="n">NumLayers</span>
+    <span class="k">global</span> <span class="n">dw_layer</span><span class="p">,</span> <span class="n">db_layer</span> <span class="c1"># dCost/dw and dCost/db </span>
+    <span class="k">global</span> <span class="n">batchsize</span>
+    
+    <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">y_target</span><span class="p">)</span><span class="o">*</span><span class="n">df_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dw_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">y_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span><span class="n">delta</span><span class="p">)</span><span class="o">/</span><span class="n">batchsize</span>
+    <span class="n">db_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">delta</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">batchsize</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">backward_step</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span><span class="n">Weights</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="p">],</span><span class="n">df_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">dw_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">y_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="n">j</span><span class="p">]),</span><span class="n">delta</span><span class="p">)</span>
+        <span class="n">db_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">delta</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">batchsize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gradient_step</span><span class="p">(</span><span class="n">eta</span><span class="p">):</span> <span class="c1"># update weights &amp; biases with the learning rate eta</span>
+    <span class="k">global</span> <span class="n">dw_layer</span><span class="p">,</span> <span class="n">db_layer</span><span class="p">,</span> <span class="n">Weights</span><span class="p">,</span> <span class="n">Biases</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="p">):</span>
+        <span class="n">Weights</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-=</span><span class="n">eta</span><span class="o">*</span><span class="n">dw_layer</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">Biases</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-=</span><span class="n">eta</span><span class="o">*</span><span class="n">db_layer</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_net</span><span class="p">(</span><span class="n">y_in</span><span class="p">,</span><span class="n">y_target</span><span class="p">,</span><span class="n">eta</span><span class="p">):</span> <span class="c1"># one full training batch</span>
+    <span class="k">global</span> <span class="n">y_out_result</span>
+    
+    <span class="n">y_out_result</span> <span class="o">=</span> <span class="n">apply_net</span><span class="p">(</span><span class="n">y_in</span><span class="p">)</span>
+    <span class="n">backprop</span><span class="p">(</span><span class="n">y_target</span><span class="p">)</span>
+    <span class="n">gradient_step</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span>
+    <span class="n">cost</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_target</span><span class="o">-</span><span class="n">y_out_result</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">batchsize</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Now we are ready to test this above network. let us first define our own function that we want the network to learn</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">myFunc</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">x1</span><span class="p">):</span>
+    <span class="n">r2</span><span class="o">=</span><span class="n">x0</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="o">*</span><span class="n">r2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x0</span><span class="p">))</span>
+
+<span class="n">xrange</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">X0</span><span class="p">,</span><span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xrange</span><span class="p">,</span><span class="n">xrange</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span><span class="n">X1</span><span class="p">),</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span> <span class="c1"># Only shows array indices not the actual range</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0a96b1a543af81ee43353652f69600560418cf6d5c3469404e47d85d4edcd3f7.png" src="../_images/0a96b1a543af81ee43353652f69600560418cf6d5c3469404e47d85d4edcd3f7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_batch</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">batchsize</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">high</span><span class="o">=+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">batchsize</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">targets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">batchsize</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># must have right dimensions</span>
+    <span class="n">targets</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">myFunc</span><span class="p">(</span><span class="n">inputs</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">inputs</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span><span class="n">targets</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let us first create the network</span>
+
+<span class="c1"># set up all the weights and biases</span>
+
+<span class="n">NumLayers</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># does not count input-layer (but does count output)</span>
+<span class="n">LayerSizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># input-layer,hidden-1,hidden-2,...,output-layer</span>
+
+<span class="c1"># initialize random weights and biases for all layers</span>
+<span class="n">Weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">high</span><span class="o">=+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">[</span> <span class="n">LayerSizes</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">LayerSizes</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="p">)]</span>
+<span class="n">Biases</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">LayerSizes</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="p">)]</span>
+
+<span class="c1"># define the batchsize</span>
+<span class="n">batchsize</span><span class="o">=</span><span class="mi">100</span>
+
+<span class="c1"># In our case, we also need to define some helper variables to make sure the back propagation works</span>
+
+<span class="n">y_layer</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">batchsize</span><span class="p">,</span><span class="n">LayerSizes</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">df_layer</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">batchsize</span><span class="p">,</span><span class="n">LayerSizes</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="p">)]</span>
+<span class="n">dw_layer</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">LayerSizes</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">LayerSizes</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="p">)]</span>
+<span class="n">db_layer</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">LayerSizes</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First we try without training the network</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_net_simple</span><span class="p">(</span><span class="n">y_in</span><span class="p">):</span> <span class="c1"># one forward pass through the network</span>
+    <span class="c1"># no storage for backprop (for simple tests)</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y_in</span> <span class="c1"># start with input values</span>
+    <span class="n">y_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumLayers</span><span class="p">):</span> <span class="c1"># loop through all layers</span>
+        <span class="c1"># j = 0 corresponds to the first layer above the input</span>
+        <span class="n">y</span><span class="p">,</span><span class="n">df</span> <span class="o">=</span> <span class="n">forward_step</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Weights</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">Biases</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="c1"># one step</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Choose some area in the 2D plane</span>
+<span class="n">test_batchsize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">testsample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">test_batchsize</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">testsample</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">X0</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">testsample</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X1</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">testoutput</span> <span class="o">=</span> <span class="n">apply_net_simple</span><span class="p">(</span><span class="n">testsample</span><span class="p">)</span>
+<span class="n">myim</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">testoutput</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X0</span><span class="p">)),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/870ff6db7b4e819c7c8ba4619693ba6f8083bf7cc5d7fe8ca46129c0ea334dc1.png" src="../_images/870ff6db7b4e819c7c8ba4619693ba6f8083bf7cc5d7fe8ca46129c0ea334dc1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import functions for updating display </span>
+<span class="c1"># (simple animation)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">clear_output</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># learning rate</span>
+<span class="n">nsteps</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">costs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsteps</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+    <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># prepare figure</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span> <span class="c1"># no axes</span>
+    
+    <span class="c1"># the crucial lines:</span>
+    <span class="n">y_in</span><span class="p">,</span><span class="n">y_target</span> <span class="o">=</span> <span class="n">make_batch</span><span class="p">()</span> <span class="c1"># random samples (points in 2D)</span>
+    <span class="n">costs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_net</span><span class="p">(</span><span class="n">y_in</span><span class="p">,</span><span class="n">y_target</span><span class="p">,</span><span class="n">eta</span><span class="p">)</span> <span class="c1"># train network (one step, on this batch)</span>
+    <span class="n">testoutput</span> <span class="o">=</span> <span class="n">apply_net_simple</span><span class="p">(</span><span class="n">testsample</span><span class="p">)</span> <span class="c1"># check the new network output in the plane</span>
+    
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">testoutput</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X0</span><span class="p">)),</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span> <span class="c1"># plot image</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">costs</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cost during training&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;number of batches&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Current network prediction&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b5e92456c7591d7111db1e78b2da18a12473411f0533a4ff98dcaad67622f73c.png" src="../_images/b5e92456c7591d7111db1e78b2da18a12473411f0533a4ff98dcaad67622f73c.png" />
+</div>
+</div>
 <section id="using-pytorch">
 <h2>Using PyTorch<a class="headerlink" href="#using-pytorch" title="Link to this heading">#</a></h2>
 <p>We will now learn implementing the above steps in PyTorch by fitting a simple dataset where
@@ -576,6 +826,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">summary</span>
 
 <span class="c1"># Generate 200 points in [-2,2]</span>
 <span class="n">X_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -594,7 +845,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/81a12e6b937f45a22922c2bc388cb86ef6b2a9601ea869142efee776ef17d81c.png" src="../_images/81a12e6b937f45a22922c2bc388cb86ef6b2a9601ea869142efee776ef17d81c.png" />
+<img alt="../_images/51da3a13bd4b91207d3f1c0093fa801b22f1496262c1b7f3c7fbc51ee66b76c7.png" src="../_images/51da3a13bd4b91207d3f1c0093fa801b22f1496262c1b7f3c7fbc51ee66b76c7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -638,11 +889,21 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
         <span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model</span>     <span class="o">=</span> <span class="n">SimpleNet</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We must choose a learning rate, decide how many epochs to train, and pick an optimizer. We’ll use plain stochastic gradient descent (SGD) here, but you can swap in Adam or others.</p>
+</section>
+</section>
+<section id="exercise">
+<h2>❓ Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p><strong>Q5:</strong> What is the total number of trainable parametrs for the above network?</p>
+<details>
+<summary>Click to show answer</summary>
+<p>Answer: answer = 97. The total number can be known using <em>summary(model)</em>.</p>
+</details><p>We must choose a learning rate, decide how many epochs to train, and pick an optimizer. We’ll use plain stochastic gradient descent (SGD) here, but you can swap in Adam or others.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hyper-parameters</span>
@@ -655,8 +916,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 <p>For regression, we commonly use mean squared error (MSE). We instantiate nn.MSELoss(). For parameter updates, we pass our model’s parameters and the learning rate to an optimizer, here <strong>torch.optim.SGD</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span>     <span class="o">=</span> <span class="n">SimpleNet</span><span class="p">()</span>
-<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -673,7 +933,7 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 <p>We’ll also track and plot training vs. validation loss for diagnosing over-/under-fitting. To illustrate everything together, we create a helper train_and_plot that takes any model instance, trains it for a given number of epochs and learning rate, then plots:</p>
 <ol class="arabic simple">
 <li><p>Training loss curve</p></li>
-<li><p>Final prediction curve vs noisy data and true <span class="math notranslate nohighlight">\(\sin(x)\)</span>.</p></li>
+<li><p>Final prediction curve vs original function.</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -755,7 +1015,6 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 </div>
 </div>
 </div>
-</section>
 <section id="over-fitting-vs-under-fitting">
 <h3>Over-fitting vs Under-fitting<a class="headerlink" href="#over-fitting-vs-under-fitting" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -914,10 +1173,14 @@ Then we convert our <em>NumPy</em> arrays into PyTorch tensors and wrap them in 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation functions</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Neural Networks</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Neural Networks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-neural-network-from-scratch"><span style="color:maroon"> A neural network from scratch </span></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pytorch">Using PyTorch</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-model">Defining the Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-fitting-vs-under-fitting">Over-fitting vs Under-fitting</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-under-fitting">Illustrating Under-fitting</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-over-fitting">Illustrating Over-fitting</a></li>
