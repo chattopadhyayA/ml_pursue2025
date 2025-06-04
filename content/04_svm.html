@@ -412,7 +412,7 @@ document.write(`
 <p><span class="caption-number">Fig. 7 </span><span class="caption-text">“svm”</span><a class="headerlink" href="#svm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p><strong>Support Vectors</strong>: Support vectors are the datapoint closest to the hyperplane. These points are the most relevant to the construction of the classifier.</p>
+<p><strong>Support Vectors</strong>: Support vectors are the datapoints closest to the hyperplane. These points are the most relevant to the construction of the classifier.</p>
 <p><strong>Hyperplane</strong>: This is the decision boundary which seperates the two classes.</p>
 <p><strong>Margin</strong>: This is the perpendicular distance from the hyperplane to the support vectors or closest points. The more the margin, the results are more better.</p>
 <section id="working-principle">
@@ -420,10 +420,13 @@ document.write(`
 <p>Without going much into the mathematics, the flowchart of SVM can be summarised as</p>
 <ol class="arabic simple">
 <li><p><strong>Assume a Linear Separator:</strong>: SVM tries to find a hyperplane <span class="math notranslate nohighlight">\(\omega\cdot x+b=0\)</span>, that separates the data into two classes.</p></li>
-<li><p><strong>Maximize the Margin</strong>: Rather than checking all possible planes, SVM optimizes for the one that maximizes the margin — the distance between the hyperplane and the closest points from each class, called support vectors.
-$<span class="math notranslate nohighlight">\(
+<li><p><strong>Maximize the Margin</strong>: Rather than checking all possible planes, SVM optimizes for the one that maximizes the margin — the distance between the hyperplane and the closest points from each class, called support vectors.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
 Margin=\frac{2}{||\omega||}
-\)</span>$</p></li>
+\]</div>
+<ol class="arabic simple" start="3">
 <li><p><strong>Optimization Problem</strong>: Minimise</p></li>
 </ol>
 <div class="math notranslate nohighlight">
