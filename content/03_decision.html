@@ -826,8 +826,7 @@ dtype: object
 </div>
 </div>
 </div>
-<p>We see that that they are almost all <code class="docutils literal notranslate"><span class="pre">float64</span></code>, however, two columns, <strong>ca</strong> and <strong>thal</strong>, have the <code class="docutils literal notranslate"><span class="pre">object</span></code> type and one column, <strong>hd</strong> has <code class="docutils literal notranslate"><span class="pre">int64</span></code>.</p>
-<p>The fact that the <strong>ca</strong> and <strong>thal</strong> columns have <code class="docutils literal notranslate"><span class="pre">object</span></code> data types suggests there is something weird going on in them. <code class="docutils literal notranslate"><span class="pre">object</span></code> datatypes are used when there are mixtures of things, like a mixture of numbers and letters. In theory, both <strong>ca</strong> and <strong>thal</strong> should just have a few values representing different categories, so let’s investigate what’s going on by printing out their unique values. We’ll start with <strong>ca</strong>:</p>
+<p>Although everything looks good. it is a good habbit to atleast check the unique variables for each entry of the column. In this case, I have already tested and found some anomaly which I will explain below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## print out unique values in the column called &#39;ca&#39;</span>
