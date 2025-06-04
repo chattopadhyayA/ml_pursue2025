@@ -455,7 +455,7 @@ P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k} ; \quad \text{where } \binom{n}{k}=\
     <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Possible number of successes</span>
     <span class="n">probs</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>  <span class="c1"># PMF values</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
     <span class="n">markerline</span><span class="p">,</span> <span class="n">stemlines</span><span class="p">,</span> <span class="n">baseline</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">markerline</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">stemlines</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
@@ -476,12 +476,12 @@ P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k} ; \quad \text{where } \binom{n}{k}=\
     <span class="n">n</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Trials (n)&#39;</span><span class="p">),</span>
     <span class="n">p</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Success Prob (p)&#39;</span><span class="p">),</span>
     <span class="n">k_highlight</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;k Highlight&#39;</span><span class="p">)</span>
-<span class="p">)</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "af56020fccc94632ba34cf1037be15f9", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_binomial(n, p, k_highlight)&gt;
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "eb3cde1c12a848d49623d8cf11843642", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_binomial(n, p, k_highlight)&gt;
 </pre></div>
 </div>
 </div>
@@ -538,7 +538,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ba7a1f92b73e4b138bfba6789f495216", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_normal(mu, sigma)&gt;
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "aeb17bb4fea04e11a4018a25ceece3ee", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_normal(mu, sigma)&gt;
 </pre></div>
 </div>
 </div>
@@ -674,7 +674,7 @@ Gini(D)=1-\sum_{i=1}^C p_i^2
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the surprise (negative log probability) for a given event.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">probability</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>  <span class="c1"># Handle the case where probability is zero to avoid log(0) error</span>
-    <span class="k">return</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probability</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">probability</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_gini</span><span class="p">(</span><span class="n">probabilities</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the Gini index of a probability distribution.&quot;&quot;&quot;</span>
@@ -688,7 +688,7 @@ Gini(D)=1-\sum_{i=1}^C p_i^2
     <span class="n">entropy</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">probability</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Handle the case where probability is zero to avoid log(0) error</span>
-            <span class="n">entropy</span> <span class="o">-=</span> <span class="n">probability</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probability</span><span class="p">)</span>
+            <span class="n">entropy</span> <span class="o">-=</span> <span class="n">probability</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">probability</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">entropy</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">visualize_surprise_and_entropy</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Surprise and Entropy&quot;</span><span class="p">):</span>
@@ -729,11 +729,11 @@ Gini(D)=1-\sum_{i=1}^C p_i^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  1.61
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  2.32
 The Gini index:  0.80
 </pre></div>
 </div>
-<img alt="../_images/9f93ffa0ffe5cf6b4d70aa900aa20819953392dc53d510cead34c8b03c0d35f9.png" src="../_images/9f93ffa0ffe5cf6b4d70aa900aa20819953392dc53d510cead34c8b03c0d35f9.png" />
+<img alt="../_images/862d67c838bd2b6acfbf7f6f54aa25f440a307287e72822631d3b259581805ae.png" src="../_images/862d67c838bd2b6acfbf7f6f54aa25f440a307287e72822631d3b259581805ae.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -747,11 +747,11 @@ The Gini index:  0.80
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  1.01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  1.46
 The Gini index:  0.48
 </pre></div>
 </div>
-<img alt="../_images/a8ea00957ac29e23f3265429b6b326a79302ff7281a537f5b4325d0b48c1649c.png" src="../_images/a8ea00957ac29e23f3265429b6b326a79302ff7281a537f5b4325d0b48c1649c.png" />
+<img alt="../_images/d7ac6ff9eb310600dae52c81d8555454c8c87d2904ca0597d82e56769754428b.png" src="../_images/d7ac6ff9eb310600dae52c81d8555454c8c87d2904ca0597d82e56769754428b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -765,11 +765,11 @@ The Gini index:  0.48
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  0.06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The entropy in this case:  0.09
 The Gini index:  0.02
 </pre></div>
 </div>
-<img alt="../_images/e3ba5cd3fa3858649cd0e97591749d2381538fe7c02c5a14cad26a432e950b45.png" src="../_images/e3ba5cd3fa3858649cd0e97591749d2381538fe7c02c5a14cad26a432e950b45.png" />
+<img alt="../_images/9ae6b32cbf096d6fb95ab3e63f9273d3efe362934704bc9e7a7b2a0ec3502281.png" src="../_images/9ae6b32cbf096d6fb95ab3e63f9273d3efe362934704bc9e7a7b2a0ec3502281.png" />
 </div>
 </div>
 </section>
