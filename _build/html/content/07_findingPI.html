@@ -184,14 +184,21 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_stat.html">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_svm.html">SVM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_decision.html">Decision tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_decision.html">Decision tree</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_svm.html">Support Vector Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html">Neural Networks</a></li>
+
+
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_further.html">Further Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_MLforHEP.html">ML for HEP</a></li>
 </ul>
 
     </div>
@@ -406,7 +413,8 @@ document.write(`
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a><section id="the-monte-carlo-approach">
 <h2>The Monte Carlo Approach<a class="headerlink" href="#the-monte-carlo-approach" title="Link to this heading">#</a></h2>
-<p>Before trying with machine learning, let us first use the Monte Carlo method for estimating <span class="math notranslate nohighlight">\(\pi\)</span>. The concept is simple: imagine randomly tossing darts at a dartboard mounted to a square. Then, <span class="math notranslate nohighlight">\(\pi\)</span> can be approximated by four times the number of darts hitting the dartboard divided by the total number of darts thrown.</p>
+<p>Before trying with machine learning, let us first use the Monte Carlo method for estimating <span class="math notranslate nohighlight">\(\pi\)</span>. In simple words, whenever any computer algorithm involves repeated random sampling to generate some numerical results, we can safely call that a Monte Carlo simulation.</p>
+<p>The concept is simple: imagine randomly tossing darts at a dartboard mounted to a square. Now if we are <em>random enough</em>, one can assume that the random darts are uniformly distributed over the square. In that case the number of points inside some region inside the square should be proportional to the area of that region. Then, <span class="math notranslate nohighlight">\(\pi\)</span> can be approximated by four times the number of darts hitting the dartboard divided by the total number of darts thrown.</p>
 <blockquote>
 <div><p>The ratio of a circle’s area (<span class="math notranslate nohighlight">\(\pi r^2\)</span>) with that to the area of a square (<span class="math notranslate nohighlight">\(4 r^2\)</span>) is <span class="math notranslate nohighlight">\(\frac{\pi}{4}\)</span>. With a unit circle, we measure the fraction <span class="math notranslate nohighlight">\(\frac{\pi}{4}\)</span> through randomness.</p>
 </div></blockquote>
@@ -419,7 +427,7 @@ document.write(`
 <span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
 
 <span class="c1"># Generate random points in the square [-1, 1] x [-1, 1]</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># This have to be uniformly sampled</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 
 

@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Neural Networks" href="06_NN_basic.html" />
-    <link rel="prev" title="Decision tree" href="04_decision.html" />
+    <link rel="prev" title="Support Vector Machine" href="04_svm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -184,14 +184,21 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_stat.html">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_svm.html">SVM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_decision.html">Decision tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_decision.html">Decision tree</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_svm.html">Support Vector Machine</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Gradient Descent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html">Neural Networks</a></li>
+
+
 
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_further.html">Further Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_MLforHEP.html">ML for HEP</a></li>
 </ul>
 
     </div>
@@ -395,6 +402,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-descent-on-the-quadratic">Visualizing descent on the Quadratic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-gradient-descent">Types of Gradient Descent</a><ul class="nav section-nav flex-column">
@@ -475,9 +483,6 @@ In the formula above</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mcolors</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">FloatSlider</span><span class="p">,</span> <span class="n">IntSlider</span>
 
-<span class="c1"># If you&#39;re using Google Colab, run this once</span>
-<span class="c1">#!pip install ipywidgets --quiet</span>
-
 <span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
@@ -491,7 +496,7 @@ In the formula above</p>
 \[f'(\theta) = 2\theta\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">func</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">theta</span><span class="o">**</span><span class="mi">2</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">grad_f</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
@@ -522,18 +527,13 @@ In the formula above</p>
 </section>
 <section id="visualizing-descent-on-the-quadratic">
 <h3>Visualizing descent on the Quadratic<a class="headerlink" href="#visualizing-descent-on-the-quadratic" title="Link to this heading">#</a></h3>
-<p>Use sliders to adjust the learning rate and number of steps and <em>check the following</em> statements</p>
-<ul class="simple">
-<li><p>if <span class="math notranslate nohighlight">\(\alpha\)</span> is too small -&gt; very slow convergence</p></li>
-<li><p>if <span class="math notranslate nohighlight">\(\alpha\)</span> is too big -&gt; might oscillate or diverge</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_gd</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">5.0</span><span class="p">):</span>
     <span class="n">steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
     <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
-    <span class="n">ys</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
 
     <span class="c1"># Compute convergence step</span>
     <span class="n">convergence_eps</span> <span class="o">=</span> <span class="mf">1e-3</span>
@@ -542,11 +542,11 @@ In the formula above</p>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$f(x)=x^2$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Descent Steps&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Descent Steps&#39;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x0</span><span class="p">),</span> <span class="n">func</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
             <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">),</span>
             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
@@ -573,12 +573,23 @@ In the formula above</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "55b7de8b857d4e6592dbeea7bb5ffcfb", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_gd(lr=0.1, steps=20, start=5.0)&gt;
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6fc9f675f2e744b589e5174b35cf2f4d", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_gd(lr=0.1, steps=20, start=5.0)&gt;
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<section id="exercise">
+<h3>❓ Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p><strong>Q7:</strong> Use sliders to adjust the learning rate and number of steps, and observe what happens to the convergence rate for very high or very low learning rate.</p>
+<details>
+<summary>Click to show answer</summary>
+<p>Answer:</p>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(\alpha\)</span> is too small -&gt; very slow convergence</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(\alpha\)</span> is too big -&gt; might oscillate or diverge</p></li>
+</ul>
+</details></section>
 </section>
 <section id="types-of-gradient-descent">
 <h2>Types of Gradient Descent<a class="headerlink" href="#types-of-gradient-descent" title="Link to this heading">#</a></h2>
@@ -758,12 +769,12 @@ In the formula above</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="04_decision.html"
+       href="04_svm.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Decision tree</p>
+        <p class="prev-next-title">Support Vector Machine</p>
       </div>
     </a>
     <a class="right-next"
@@ -799,6 +810,7 @@ In the formula above</p>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-descent-on-the-quadratic">Visualizing descent on the Quadratic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-gradient-descent">Types of Gradient Descent</a><ul class="nav section-nav flex-column">

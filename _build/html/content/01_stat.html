@@ -184,14 +184,21 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Fundamentals of Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_MLintro.html">ML Intro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_svm.html">SVM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_decision.html">Decision tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_decision.html">Decision tree</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_svm.html">Support Vector Machine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_gradient_descent.html">Gradient Descent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_NN_basic.html">Neural Networks</a></li>
+
+
 
 <li class="toctree-l1"><a class="reference internal" href="07_findingPI.html">Finding PI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_CNN.html">Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_further.html">Further Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_MLforHEP.html">ML for HEP</a></li>
 </ul>
 
     </div>
@@ -395,19 +402,19 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-vs-probability">Likelihood vs Probability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-exercise">❓ Student Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">❓ Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms-and-distribution-approximation"><span style="color:maroon"> Histograms and Distribution Approximation </span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">❓ Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise-entropy-and-gini-index"><span style="color:maroon"> Surprise, entropy and gini index </span></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise-self-information">Surprise (Self-Information)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shanon-entropy">Shanon entropy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-index">Gini index</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">❓ Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">❓ Exercise</a></li>
 </ul>
 </li>
 </ul>
@@ -579,8 +586,8 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
 </div>
 </div>
 </section>
-<section id="student-exercise">
-<h3>❓ Student Exercise<a class="headerlink" href="#student-exercise" title="Link to this heading">#</a></h3>
+<section id="id2">
+<h3>❓ Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p><strong>Q3:</strong> Given <span class="math notranslate nohighlight">\(8\)</span> heads out of <span class="math notranslate nohighlight">\(10\)</span> tosses, sketch or estimate the maximum likelihood estimate (MLE) for <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <details>
 <summary>Click to show answer</summary>
@@ -620,8 +627,8 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
 <img alt="../_images/754280b6a5ac682faf08cfb7f7ef20d433dabb68066d65e799e064498de64100.png" src="../_images/754280b6a5ac682faf08cfb7f7ef20d433dabb68066d65e799e064498de64100.png" />
 </div>
 </div>
-<section id="id2">
-<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h3>❓ Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p><strong>Q4:</strong> Why does the histogram with <span class="math notranslate nohighlight">\(N=10\)</span> look so different from <span class="math notranslate nohighlight">\(N=10000\)</span>?</p>
 <details>
 <summary>Click to show answer</summary>
@@ -660,8 +667,8 @@ Gini(D)=1-\sum_{i=1}^C p_i^2
 <li><p>Where, <span class="math notranslate nohighlight">\(C\)</span> is the number of unique classes in the dataset. <span class="math notranslate nohighlight">\(p_i\)</span> is the proportion of data sample belonging to class <span class="math notranslate nohighlight">\(i\)</span> in the Dataset <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>❓ Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p><strong>Q5:</strong> If all samples belong to same class, then what is the Gini index?</p>
 <details>
 <summary>Click to show answer</summary>
@@ -773,8 +780,8 @@ The Gini index:  0.02
 </div>
 </div>
 </section>
-<section id="id4">
-<h3>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3>❓ Exercise<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p><strong>Q6:</strong> For different situations that you can think of, do a quantitative analysis of Gini index vs Shanon entropy.</p>
 </section>
 </section>
@@ -852,19 +859,19 @@ The Gini index:  0.02
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-vs-probability">Likelihood vs Probability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-exercise">❓ Student Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">❓ Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms-and-distribution-approximation"><span style="color:maroon"> Histograms and Distribution Approximation </span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">❓ Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise-entropy-and-gini-index"><span style="color:maroon"> Surprise, entropy and gini index </span></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise-self-information">Surprise (Self-Information)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shanon-entropy">Shanon entropy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-index">Gini index</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">❓ Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">❓ Exercise</a></li>
 </ul>
 </li>
 </ul>

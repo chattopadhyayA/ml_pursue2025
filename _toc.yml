@@ -6,10 +6,11 @@ root: content/00_overview
 chapters:
 - file: content/01_stat
 - file: content/02_MLintro
-- file: content/03_svm
-- file: content/04_decision
+- file: content/03_decision
+- file: content/04_svm
 - file: content/05_gradient_descent
 - file: content/06_NN_basic
 - file: content/07_findingPI
 - file: content/08_CNN
 - file: content/09_further
+- file: content/10_MLforHEP
