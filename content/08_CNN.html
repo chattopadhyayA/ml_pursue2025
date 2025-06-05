@@ -437,7 +437,7 @@ g(t)=(f * h)(t) = \int_{-\infty}^{\infty} f(\tau) \cdot h(t - \tau) \, d\tau'
 <hr class="docutils" />
 <section id="simple-example-1d-discrete-convolution">
 <h3>Simple Example: <strong>1D discrete Convolution</strong><a class="headerlink" href="#simple-example-1d-discrete-convolution" title="Link to this heading">#</a></h3>
-<p>Let’s say you have a signal 𝑓 and a filter ℎ:</p>
+<p>Let’s say you have a signal 𝑓 and a filter ℎ, the whole process of convolution can be summarised as the following:</p>
 <div class="math notranslate nohighlight">
 \[ f = [3,2,1,0]\]</div>
 <div class="math notranslate nohighlight">
@@ -451,34 +451,43 @@ g(t)=(f * h)(t) = \int_{-\infty}^{\infty} f(\tau) \cdot h(t - \tau) \, d\tau'
 <ol class="arabic simple" start="2">
 <li><p>Slide the filter across the input and multiply-and-sum at each step:</p></li>
 </ol>
+<hr class="docutils" />
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[\fbox{3},2,1,0]\]</div>
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~[-1,0,\fbox{1}]\]</div>
-<p><span class="math notranslate nohighlight">\( 3*1=3\)</span>
-$<span class="math notranslate nohighlight">\(~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[\fbox{3},\fbox{2},1,0]\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(~~~~~~~~~~~~~~~~~~[-1,\fbox{0}, \fbox{1}]\)</span><span class="math notranslate nohighlight">\(
-\)</span> 3<em>0 + 2</em>1 =2$</p>
+<p><span class="math notranslate nohighlight">\( 3*1=3\)</span></p>
+<hr class="docutils" />
+<div class="math notranslate nohighlight">
+\[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[\fbox{3},\fbox{2},1,0]\]</div>
+<div class="math notranslate nohighlight">
+\[~~~~~~~~~~~~~~~~~~[-1,\fbox{0}, \fbox{1}]\]</div>
+<p><span class="math notranslate nohighlight">\( 3*0 + 2*1 =2\)</span></p>
+<hr class="docutils" />
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[\fbox{3},\fbox{2},\fbox{1},0]\]</div>
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~[\fbox{-1},\fbox{0},\fbox{1}]\]</div>
 <p><span class="math notranslate nohighlight">\( 3*(-1) + 2*0 + 1*1 =-2\)</span></p>
+<hr class="docutils" />
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[3,\fbox{2},\fbox{1},\fbox{0}]\]</div>
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[\fbox{-1},\fbox{0},\fbox{1}]\]</div>
 <p><span class="math notranslate nohighlight">\( 2*(-1) + 1*0 + 0*1 =-2\)</span></p>
+<hr class="docutils" />
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[3,2,\fbox{1},\fbox{0}]\]</div>
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[\fbox{-1},\fbox{0},1]\]</div>
 <p><span class="math notranslate nohighlight">\( 1*(-1) + 0*0  =-1\)</span></p>
+<hr class="docutils" />
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[3,2,1,\fbox{0}]\]</div>
 <div class="math notranslate nohighlight">
 \[~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[\fbox{-1},0,1]\]</div>
 <p><span class="math notranslate nohighlight">\( 0*(-1)  =0\)</span></p>
+<hr class="docutils" />
 <p>Resulting convolved signal:</p>
 <div class="math notranslate nohighlight">
 \[f*h= [3,2,-2,-2,-1,0]\]</div>
@@ -832,7 +841,7 @@ Epoch 10 - Loss: 62.597
   <div class="footer-item">
     
 <div class="extra_footer">
-  <div><i>From Rivendell to the ends of the Earth, this code is free to all who wander.</i></div>
+  <div><i>From Rivendell to the ends of the Earth, this code is free to all who wander-- Arghya Chattopadhyay.</i></div>
 </div>
   </div>
   

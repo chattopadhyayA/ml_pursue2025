@@ -400,7 +400,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data">Import the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-identifying-missing-data">Missing Data: Identifying Missing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-formatting">Data formatting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-classification-tree">Build A Classification Tree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-classification-tree">Building A Classification Tree</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-tree-learn">How does a tree “learn”?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
 </ul>
@@ -423,7 +423,7 @@ document.write(`
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a><section id="concept">
 <h2>Concept<a class="headerlink" href="#concept" title="Link to this heading">#</a></h2>
-<p>Decision trees are the simplest possible ML code that we can build. Rather than thinking too much about it, let us jump into the details. There are two type sof decision tree</p>
+<p>Decision trees are the simplest possible ML code that we can build. Rather than thinking too much about it, let us jump into the details. There are mainly two types of decision tree</p>
 <p><strong>Classification tree</strong> : Classify people or things into two or more discrete categories. As we have done before</p>
 <pre  class="mermaid">
         graph TD
@@ -446,13 +446,12 @@ document.write(`
     F -- No --&gt; H[&quot;Other Non-Fiction&lt;div&gt;(22 books)&quot;]
     </pre><p>We see multiple parts in the <em>upside down tree</em> shown above. Here are its main components:</p>
 <ul class="simple">
-<li><p>Root node or root: The very top node in the tree</p></li>
-<li><p>Internal or decision nodes: They have arrows pointing to them and away from them.</p></li>
-<li><p>Branches: The arrows are called branches, they might be labelles “yes” or “no”, or can be unlabelled. Usually if there is no label, then if the <em>Node</em> is <em>True</em> you go <em>Left</em> or else you go <em>Right</em>.</p></li>
-<li><p>Leaf nodes or leaves: They only have arrows pointing to them and represent the final classification.</p></li>
+<li><p><strong>Root node or root</strong>: The very top node in the tree</p></li>
+<li><p><strong>Internal or decision nodes</strong>: They have arrows pointing to them and away from them.</p></li>
+<li><p><strong>Branches</strong>: The arrows are called branches, they might be labelled “yes” or “no”, or can be unlabelled. Usually if there is no label, then if the <code class="docutils literal notranslate"><span class="pre">Node</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> you go <code class="docutils literal notranslate"><span class="pre">Left</span></code> or else you go <code class="docutils literal notranslate"><span class="pre">Right</span></code>.</p></li>
+<li><p><strong>Leaf nodes or leaves</strong>: They only have arrows pointing to them and represent the final classification.</p></li>
 </ul>
-<p>Note that an arrow to the left typically represents <code class="docutils literal notranslate"><span class="pre">True</span></code>, while an arrow to the right represents <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-<p>You can see that classification trees are conceptually simple models. This means that they are highly <strong>interpretable</strong>, something that can be very desireable for a model as it allows us to peer into the inner workings of how the model works instead of having to treat the model as a <strong>black box</strong>.</p>
+<p>You can see that classification trees are conceptually simple models. This means that they are highly <strong>interpretable</strong>, something that can be very desireable for a model as it allows us to peer into the inner workings of how the model works, instead of having to treat the model as a <strong>black box</strong>.</p>
 <p>We will use <strong>scikit-learn</strong> and <strong>Cost Complexity Pruning</strong> to build this <strong>Classification Tree</strong> (below), which uses continuous and categorical data from the <strong><a class="reference external" href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning Repository</a></strong> to predict whether or not a patient has <strong><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Heart+Disease">heart disease</a></strong>:</p>
 <figure class="align-center" id="tree">
 <a class="reference internal image-reference" href="../_images/tree.png"><img alt="../_images/tree.png" src="../_images/tree.png" style="height: 300px;" />
@@ -465,7 +464,7 @@ document.write(`
 </section>
 <section id="import-the-modules-that-will-do-all-the-work">
 <h2>Import the modules that will do all the work<a class="headerlink" href="#import-the-modules-that-will-do-all-the-work" title="Link to this heading">#</a></h2>
-<p>The very first thing we do is load in a bunch of python modules. Python, itself, just gives us a basic programming language. These modules give us extra functionality to import the data, clean it up and format it, and then build, evaluate and draw the classification tree.</p>
+<p>The very first thing we do is load in a bunch of python modules. By this time you already know that Python, itself, just gives us a basic programming language. These modules give us extra functionality to import the data, clean it up and format it, and then build, evaluate and draw the classification tree.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span> <span class="c1"># to load and manipulate data and for One-Hot Encoding</span>
@@ -486,13 +485,13 @@ document.write(`
 <h2>Import the data<a class="headerlink" href="#import-the-data" title="Link to this heading">#</a></h2>
 <p>Now we load in a dataset from the <strong><a class="reference external" href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning Repository</a></strong>.
 Specifically, we are going to use the <strong><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Heart+Disease">Heart Disease Dataset</a></strong>. This dataset will allow us to predict if someone has heart disease based on their sex, age, blood pressure and a variety of other metrics.</p>
-<p>When <strong>pandas</strong> (<strong>pd</strong>) reads in data, it returns a <strong>dataframe</strong>, which is a lot like a spreadsheet. The data are organized in rows and columns and each row can contain a mixture of text and numbers. The standard variable name for a <strong>dataframe</strong> is the initials <strong>df</strong>, and that is what we will use here:</p>
+<p>When <strong>pandas</strong> (<strong>pd</strong>) reads in data, it returns a <strong>dataframe</strong>, which is a lot exactly like a spreadsheet, but similar with the structure of having a header, columns and data. The data are organized in rows and columns and each row can contain a mixture of text and numbers. The standard variable name for a <strong>dataframe</strong> is the initials <strong>df</strong>, and that is what we will use here:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data&quot;</span>
 
 <span class="c1"># Load the dataset, specifying that &#39;?&#39; denotes missing values</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="c1">## print the first 5 rows</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -624,7 +623,7 @@ Specifically, we are going to use the <strong><a class="reference external" href
 </table>
 </div></div></div>
 </div>
-<p>We see that instead of nice column names, we just have column numbers.  Since nice column names would make it easier to know how to format the data, let’s replace the column numbers with the following column names:</p>
+<p>We see that instead of nice column names, we just have column numbers. Normally you should check the dataset repository to see if they are including the headers in the data or not. If the headers are not icluded then, it should be written in the dataset repository. For example, in this case, the original dataset do not have the headers. That is why we read the dataset with <code class="docutils literal notranslate"><span class="pre">header=None</span></code> option included. Since nice column names would make it easier to know how to format the data, let’s replace the column numbers with the following column names (grabbed from the repository website):</p>
 <ul class="simple">
 <li><p><strong>age</strong>,</p></li>
 <li><p><strong>sex</strong>,</p></li>
@@ -791,14 +790,13 @@ Specifically, we are going to use the <strong><a class="reference external" href
 </section>
 <section id="missing-data-identifying-missing-data">
 <h2>Missing Data: Identifying Missing Data<a class="headerlink" href="#missing-data-identifying-missing-data" title="Link to this heading">#</a></h2>
-<p>Unfortunately, the biggest part of any data analysis project is making sure that the data is correctly formatted and fixing it when it is not. The first part of this process is identifying and dealing with <strong>Missing Data</strong>.</p>
-<p><strong>Missing Data</strong> is simply a blank space, or a surrogate value like <strong>NA</strong>, that indicates that we failed to collect data for one of the features.</p>
+<p>Unfortunately, the biggest part of any data analysis project is making sure that the data is correctly formatted and fixing it when it is not. <strong>Missing Data</strong> is simply a blank space, or a surrogate value like <strong>NA</strong>, or may be just a simple “?” mark, that indicates that we failed to collect data for one or more of the features.</p>
 <p>There are two main ways to deal with missing data:</p>
 <ol class="arabic simple">
-<li><p>We can remove the rows that contain missing data from the dataset. This is relatively easy to do, but it wastes all of the other values that we collected. How a big of a waste this is depends on how important this missing value is for classification. For example, if we are missing a value for <strong>age</strong>, and <strong>age</strong> is not useful for classifying if people have heart disease or not, then it would be a shame to throw out all of someone’s data just because we do not have their <strong>age</strong>.</p></li>
-<li><p>We can <strong>impute</strong> the values that are missing. Ii is just a fancy way of saying “we can make an educated guess about about what the value should be”. Continuing our example where we are missing a value for <strong>age</strong>, instead of throwing out the entire row of data, we can fill the missing value with the average age or the median age, or use some other, more sophisticated approach, to guess at an appropriate value.</p></li>
+<li><p>We can remove the rows that contain missing data from the dataset. This is relatively easy to do, but it wastes all of the other values that we collected. How a big of a waste this is depends on how important this missing value is for classification. For example, if we are missing a value for <strong>age</strong>, and <strong>age</strong> is not useful for classifying if people have heart disease or not, then it would be a shame to throw out all of the data just because we do not have their <strong>age</strong>.</p></li>
+<li><p>We can <strong>guess-timate</strong> the values that are missing, depending on the dataset you are handling, your guess might needs to be changed. So, be careful with this approach.</p></li>
 </ol>
-<p>In this section, we’ll focus on identifying missing values in the dataset.</p>
+<p>In this section, we will focus on identifying missing values in the dataset.</p>
 <p>First, let’s see what sort of data is in each column.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1048,8 +1046,8 @@ dtype: object
 </section>
 <section id="data-formatting">
 <h2>Data formatting<a class="headerlink" href="#data-formatting" title="Link to this heading">#</a></h2>
-<p>Now we have no missing elements in the data, so we can format it like we need it. Here we will make “hd” as the target space (Y) and rest of the data as X.</p>
-<p>In the code below we are using <code class="docutils literal notranslate"><span class="pre">copy()</span></code> to copy the data <em>by value</em>. By default, pandas uses copy <em>by reference</em>. Using <code class="docutils literal notranslate"><span class="pre">copy()</span></code> ensures that the original data <code class="docutils literal notranslate"><span class="pre">df_no_missing</span></code> is not modified when we modify <code class="docutils literal notranslate"><span class="pre">X</span></code> or <code class="docutils literal notranslate"><span class="pre">y</span></code>. In other words, if we make a mistake when we are formatting the columns for classification trees, we can just re-copy <code class="docutils literal notranslate"><span class="pre">df_no_missing</span></code>, rather than reload the original data and remove the missing values etc.</p>
+<p>Now we have no missing elements in the data, so we can format it like we need it. Here we will make “hd” as the target space <span class="math notranslate nohighlight">\(y\)</span> and rest of the data as <span class="math notranslate nohighlight">\(X\)</span>. In some sense in this way <span class="math notranslate nohighlight">\(X\)</span> can be thought of as our input or independent variables and <span class="math notranslate nohighlight">\(y\)</span> as the dependent one.</p>
+<p>In the code below we are using <code class="docutils literal notranslate"><span class="pre">copy()</span></code> to copy the data <em>by value</em>. By default, pandas uses copy <em>by reference</em>. Using <code class="docutils literal notranslate"><span class="pre">copy()</span></code> ensures that the original data <code class="docutils literal notranslate"><span class="pre">df_no_missing</span></code> is not modified when we modify <code class="docutils literal notranslate"><span class="pre">X</span></code> or <code class="docutils literal notranslate"><span class="pre">y</span></code>. In other words, if we make a mistake when we are formatting the columns for classification trees, we can just re-copy <code class="docutils literal notranslate"><span class="pre">df_no_missing</span></code>, rather than reload the original data and remove the missing values</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Make a new copy of the columns used to make predictions</span>
@@ -1196,8 +1194,7 @@ Name: hd, dtype: int64
 </div>
 </div>
 </div>
-<p>Now that we have created <strong>X</strong>, which has the data we want to use to make predictions, and <strong>y</strong>, which has the data we want to predict, we are ready to continue formatting <strong>X</strong> so that it is suitable for making a <strong>Decision Tree</strong>.</p>
-<p>Now that we have split the dataframe into two pieces, <code class="docutils literal notranslate"><span class="pre">X</span></code>, which contains the data we will use to  predict classifications, and <code class="docutils literal notranslate"><span class="pre">y</span></code>, which contains the known classifications in our training dataset, we need to take a closer look at the variables in <code class="docutils literal notranslate"><span class="pre">X</span></code>. The list bellow tells us what each variable represents and the type of data (<strong>float</strong> or <strong>categorical</strong>) it should contain:</p>
+<p>Now that we have split the dataframe into two pieces, <span class="math notranslate nohighlight">\(X\)</span>, which contains the data we will use to  predict classifications, and <span class="math notranslate nohighlight">\(y\)</span>, which contains the known classifications in our training dataset, we need to take a closer look at the variables in <span class="math notranslate nohighlight">\(X\)</span>. The list bellow tells us what each variable represents and the type of data (<strong>float</strong> or <strong>categorical</strong>) it should contain (again consult the data respository for understanding the data):</p>
 <ul class="simple">
 <li><p><strong>age</strong>, <strong>Float</strong></p></li>
 <li><p><strong>sex</strong> - <strong>Category</strong></p>
@@ -1253,7 +1250,7 @@ Name: hd, dtype: int64
 </ul>
 </li>
 </ul>
-<p>Now, just to review, let’s look at the data types in <code class="docutils literal notranslate"><span class="pre">X</span></code> to remember how python is seeing the data right now.</p>
+<p>Now, just to review, let’s look at the data types in <code class="docutils literal notranslate"><span class="pre">X</span></code> to see how python is seeing the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">dtypes</span>
@@ -1279,15 +1276,15 @@ dtype: object
 </div>
 </div>
 </div>
-<p>So, we see that <strong>age</strong>, <strong>restbp</strong>, <strong>chol</strong> and <strong>thalach</strong> are all <code class="docutils literal notranslate"><span class="pre">float64</span></code>, which is good, because we want them to be floating point numbers. All of the other columns, however, need to be inspected to make sure they only contain reasonable values, and some of them need to change. This is because, while <strong>scikit learn Decision Trees</strong> natively support continuous data, like resting blood preasure (<strong>restbp</strong>) and maximum heart rate (<strong>thalach</strong>), they do not natively support categorical data, like chest pain (<strong>cp</strong>), which contains 4 different categories. Thus, in order to use categorical data with <strong>scikit learn Decision Trees</strong>, we have to use a trick that converts a column of categorical data into multiple columns of binary values. This trick is called <strong>One-Hot Encoding</strong>.</p>
-<p>At this point you may be wondering, “what’s wrong with treating categorical data like continuous data?” To answer that question, let’s look at an example: For the <strong>cp</strong> (chest pain) column, we have 4 options:</p>
+<p>So, we see that <strong>age</strong>, <strong>restbp</strong>, <strong>chol</strong> and <strong>thalach</strong> are all <code class="docutils literal notranslate"><span class="pre">float64</span></code>, which is good, because we want them to be floating point numbers. All of the other columns, however, need to be inspected to make sure they only contain reasonable values, and some of them need to change. This is because, while <strong>scikit learn Decision Trees</strong> natively support continuous data, like resting blood preasure (<strong>restbp</strong>) and maximum heart rate (<strong>thalach</strong>), they do not natively support categorical data, like chest pain (<strong>cp</strong>), which contains <span class="math notranslate nohighlight">\(4\)</span> different categories. Thus, in order to use categorical data with <strong>scikit learn Decision Trees</strong>, we have to use a trick that converts a column of categorical data into multiple columns of binary values. This trick is called <strong>One-Hot Encoding</strong>.</p>
+<p>At this point you may be wondering, “what’s wrong with treating categorical data like continuous data?” To answer that question, let’s look at an example: For the <strong>cp</strong> (chest pain) column, we have <span class="math notranslate nohighlight">\(4\)</span> options:</p>
 <ol class="arabic simple">
 <li><p>typical angina</p></li>
 <li><p>atypical angina</p></li>
 <li><p>non-anginal pain</p></li>
 <li><p>asymptomatic</p></li>
 </ol>
-<p>If we treated these values, 1, 2, 3 and 4, like continuous data, then we would assume that 4, which means “asymptomatic”, is more similar to 3, which means “non-anginal pain”, than it is to 1 or 2, which are other types of chest pain. That means the decision tree would be more likely to cluster the patients with 4s and 3s together than the patients with 4s and 1s together. In contrast, if we treat these numbers like categorical data, then we treat each one as a separate category that is no more or less similar to any of the other categories. Thus, the likelihood of clustering patients with 4s with 3s is the same as clustering 4s with 1s, and that approach is more reasonable.</p>
+<p>If we treated these values, <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(2\)</span>, <span class="math notranslate nohighlight">\(3\)</span> and <span class="math notranslate nohighlight">\(4\)</span>, like continuous data, then we would assume that <span class="math notranslate nohighlight">\(4\)</span>, which means “asymptomatic”, is more similar to <span class="math notranslate nohighlight">\(3\)</span>, which means “non-anginal pain”, than it is to <span class="math notranslate nohighlight">\(1\)</span> or <span class="math notranslate nohighlight">\(2\)</span>, which are other types of chest pain. That means the decision tree would be more likely to cluster the patients with <span class="math notranslate nohighlight">\(4\)</span>s and <span class="math notranslate nohighlight">\(3\)</span>s together than the patients with <span class="math notranslate nohighlight">\(4\)</span>s and <span class="math notranslate nohighlight">\(1\)</span>s together. In contrast, if we treat these numbers like categorical data, then we treat each one as a separate category that is no more or less similar to any of the other categories.</p>
 <p>Now let’s inspect and, if needed, convert the columns that contain categorical and integer data into the correct datatypes. We’ll start with <strong>cp</strong> (chest pain) by inspecting all of its unique values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1446,8 +1443,8 @@ dtype: object
 </table>
 </div></div></div>
 </div>
-<p>As we can see in the printout above, <code class="docutils literal notranslate"><span class="pre">get_dummies()</span></code> puts all of the columns it does not process in the front and it puts <strong>cp</strong> at the end. It also splits <strong>cp</strong> into <strong>4</strong> columns, just like we expected it. <strong>cp_1.0</strong> is <code class="docutils literal notranslate"><span class="pre">1</span></code> for any patient that scored a <strong>1</strong> for chest pain and <code class="docutils literal notranslate"><span class="pre">0</span></code> for all other patients. <strong>cp_2.0</strong> is <code class="docutils literal notranslate"><span class="pre">1</span></code> for any patient that scored <strong>2</strong> for chest pain and <code class="docutils literal notranslate"><span class="pre">0</span></code> for all other patients. <strong>cp_3.0</strong> is <code class="docutils literal notranslate"><span class="pre">1</span></code> for any patient that scored <strong>3</strong> for chest pain and <strong>cp_4.0</strong> is <code class="docutils literal notranslate"><span class="pre">1</span></code> for any patient that scored <strong>4</strong> for chest pain.</p>
-<p>Now that we see how <code class="docutils literal notranslate"><span class="pre">get_dummies()</span></code> works, let’s use it on the four categorical columns that have more than 2 categories and save the result.</p>
+<p>As we can see in the printout above, <code class="docutils literal notranslate"><span class="pre">get_dummies()</span></code> puts all of the columns it does not process in the front and it puts <strong>cp</strong> at the end. It also splits <strong>cp</strong> into <strong>4</strong> columns, just like we expected it. <strong>cp_1.0</strong> is <span class="math notranslate nohighlight">\(1\)</span> for any patient that scored a <strong>1</strong> for chest pain and <span class="math notranslate nohighlight">\(0\)</span> for all other patients. <strong>cp_2.0</strong> is <span class="math notranslate nohighlight">\(1\)</span> for any patient that scored <strong>2</strong> for chest pain and <span class="math notranslate nohighlight">\(0\)</span> for all other patients. <strong>cp_3.0</strong> is <span class="math notranslate nohighlight">\(1\)</span> for any patient that scored <strong>3</strong> for chest pain and <strong>cp_4.0</strong> is <span class="math notranslate nohighlight">\(1\)</span> for any patient that scored <strong>4</strong> for chest pain.</p>
+<p>Now that we see how <code class="docutils literal notranslate"><span class="pre">get_dummies()</span></code> works, let’s use it on the four categorical columns that have more than 2 categories and save the result. <strong>Check</strong> if we missed any other categorical data. If yes then include that in the following.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> 
@@ -1626,7 +1623,7 @@ dtype: object
 <p>5 rows × 22 columns</p>
 </div></div></div>
 </div>
-<p>Now, one last thing before we build a <strong>Classification Tree</strong>.  <code class="docutils literal notranslate"><span class="pre">y</span></code> doesn’t just contain <strong>0</strong>s and <strong>1</strong>s. Instead, it has <strong>5</strong> different levels of heart disease. <strong>0 =</strong> no heart disease and <strong>1-4</strong> are various degrees of heart disease. We can see this with <code class="docutils literal notranslate"><span class="pre">unique()</span></code>:</p>
+<p>Now, one last thing before we build our very first <strong>Classification Tree</strong>.  <span class="math notranslate nohighlight">\(y\)</span> doesn’t just contain <span class="math notranslate nohighlight">\(0\)</span>s and <span class="math notranslate nohighlight">\(1\)</span>s. Instead, it has <span class="math notranslate nohighlight">\(5\)</span> different levels of heart disease. <span class="math notranslate nohighlight">\(0 =\)</span> no heart disease and <span class="math notranslate nohighlight">\(1-4\)</span> are various degrees of heart disease. We can see this with <code class="docutils literal notranslate"><span class="pre">unique()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -1639,7 +1636,7 @@ dtype: object
 </div>
 </div>
 </div>
-<p>For simplicity here we will be only making a tree that does simple classification and only care if someone has heart disease or not, so we need to convert all numbers <strong>&gt; 0</strong> to <strong>1</strong>.</p>
+<p>For simplicity here we will be only making a tree that does simple classification and only care if someone has heart disease or not, so we need to convert all numbers <span class="math notranslate nohighlight">\(&gt; 0\)</span> to <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_not_zero_index</span> <span class="o">=</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="c1"># get the index for each non-zero value in y</span>
@@ -1655,9 +1652,9 @@ dtype: object
 </div>
 </div>
 </section>
-<section id="build-a-classification-tree">
-<h2>Build A Classification Tree<a class="headerlink" href="#build-a-classification-tree" title="Link to this heading">#</a></h2>
-<p>At long last, the data are correctly formatted for making a <strong>Classification Tree</strong>. Now we simply split the data into <strong>training</strong> and <strong>testing</strong> sets and build the tree.</p>
+<section id="building-a-classification-tree">
+<h2>Building A Classification Tree<a class="headerlink" href="#building-a-classification-tree" title="Link to this heading">#</a></h2>
+<p>Finally, the data are correctly formatted for making a <strong>Classification Tree</strong>. Now we simply split the data into <strong>training</strong> and <strong>testing</strong> sets and build the tree itself.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## split the data into training and testing sets</span>
@@ -1690,7 +1687,7 @@ dtype: object
 <img alt="../_images/099392d3a7fb5dcfaa03373a7588adb6b78536f6952daec3aac282d11c9aada3.png" src="../_images/099392d3a7fb5dcfaa03373a7588adb6b78536f6952daec3aac282d11c9aada3.png" />
 </div>
 </div>
-<p>OK, we’ve built a <strong>Classification Tree</strong> for classification. Let’s see how it performs on the <strong>Testing Dataset</strong> by running the <strong>Testing Dataset</strong> down the tree and drawing a <strong>Confusion Matrix</strong>.</p>
+<p>Fuyooh!!, we’ve built a <strong>Classification Tree</strong> for classification. Let us now observe how it performs on the <strong>Testing Dataset</strong> by running the <strong>Testing Dataset</strong> down the tree and drawing a <strong>Confusion Matrix</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## plot_confusion_matrix() will run the test data down the tree and draw</span>
@@ -1744,7 +1741,7 @@ dtype: object
 </ul>
 </li>
 </ul>
-<p>Thankfully, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> offers functions that compute all of these metrics for us, so we don’t have to do much work to compute these.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> is generous enough to bless us with functions that compute all of these metrics for us, so we don’t have to do much work to compute these functions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for computing accuracy, precision, recall, and F1 score</span>
@@ -1848,7 +1845,7 @@ F1 Score: 0.8325
 </section>
 <section id="how-does-a-tree-learn">
 <h2>How does a tree “learn”?<a class="headerlink" href="#how-does-a-tree-learn" title="Link to this heading">#</a></h2>
-<p>Now we can ask the question, how is the tree getting trained? While at first it might seem somewhat mysterious when you think about it, how the model actually trains is relatively straight forward, and it comes down to a common theme in ML: the minimization/maximization of some metric guiding an iterative training process. Let’s see how a tree is trained to get a understanding.</p>
+<p>Now we can ask the question, how is the tree getting trained? While at first it might seem somewhat mysterious when you think about it, how the model actually trains is relatively straight forward, and it comes down to a common theme in ML: the minimization/maximization of some metric guiding an iterative training process.</p>
 <p>Remember the notion of gini index that we learned just before. When you start, at the begining you only have the root node, in which all of your data will fall since no split has been made. So Gini index is zero there. In order to determine a split, the training algorithm creates all possible splits using all features and all values of those features as thresholds. This process is repeated for all possible splits, and then the “best” split is chosen by choosing the one has the lowest total Gini impurity.</p>
 <section id="exercise">
 <h3>❓ Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
@@ -1960,7 +1957,7 @@ F1 Score: 0.8325
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data">Import the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-identifying-missing-data">Missing Data: Identifying Missing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-formatting">Data formatting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-classification-tree">Build A Classification Tree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-classification-tree">Building A Classification Tree</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-tree-learn">How does a tree “learn”?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">❓ Exercise</a></li>
 </ul>
@@ -1993,7 +1990,7 @@ F1 Score: 0.8325
   <div class="footer-item">
     
 <div class="extra_footer">
-  <div><i>From Rivendell to the ends of the Earth, this code is free to all who wander.</i></div>
+  <div><i>From Rivendell to the ends of the Earth, this code is free to all who wander-- Arghya Chattopadhyay.</i></div>
 </div>
   </div>
   
