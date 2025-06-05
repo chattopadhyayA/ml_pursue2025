@@ -30,7 +30,7 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
-  extra_footer: <div><i>From Rivendell to the ends of the Earth, this code is free to all who wander.</i></div>
+  extra_footer: <div><i>From Rivendell to the ends of the Earth, this code is free to all who wander-- Arghya Chattopadhyay.</i></div>
 
 # Adding settings for the sphinx builder
 sphinx:
