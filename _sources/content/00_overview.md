@@ -86,6 +86,10 @@ align:  center
 
 - There are questions in the jupyter lab notebooks, where the answers are hidden. But a single click would unveil the answers. The workshop will work on a *honour-system*, you are not allowed to open the answers before you are told to do so. 
 
+- If some of the code cells do not run in Google Colab, check the warning or error message for missing packages and install them in a new cell using  
+  `!pip install <missing-package-name>`  
+before running the notebook again.
+
 >  <span style="color:red"> With all these we are now ready to proceed with the following topics.. </span> 
 
 
