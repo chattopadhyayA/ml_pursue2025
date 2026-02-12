@@ -642,10 +642,13 @@ I(p)= -\log_2(p)
 <h3>Shanon entropy<a class="headerlink" href="#shanon-entropy" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Entropy is the <strong>average surprise</strong> across all possible outcomes.</p></li>
-<li><p>For a random variable <span class="math notranslate nohighlight">\(X\)</span> with outcomes <span class="math notranslate nohighlight">\(x_i\)</span> and probabilities <span class="math notranslate nohighlight">\(p_i\)</span>, Shanon entropy is defined as
-$<span class="math notranslate nohighlight">\(
+<li><p>For a random variable <span class="math notranslate nohighlight">\(X\)</span> with outcomes <span class="math notranslate nohighlight">\(x_i\)</span> and probabilities <span class="math notranslate nohighlight">\(p_i\)</span>, Shanon entropy is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
 S(X)=-\sum_i p_i\log_2(pi)
-\)</span>$</p></li>
+\]</div>
+<ul class="simple">
 <li><p>Higher entropy –&gt; more uncertainty; lower entropy –&gt; less uncertainty</p></li>
 </ul>
 </section>
@@ -653,10 +656,13 @@ S(X)=-\sum_i p_i\log_2(pi)
 <h3>Gini index<a class="headerlink" href="#gini-index" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Taking <span class="math notranslate nohighlight">\(\log\)</span> is computationally more taxing and therefore most of the times we use different other functions or formulas to quantify same thing as entropy.</p></li>
-<li><p>To measure the <strong>impurity</strong> of a dataset, we use Gini index as
-$<span class="math notranslate nohighlight">\(
+<li><p>To measure the <strong>impurity</strong> of a dataset, we use Gini index as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
 Gini(D)=1-\sum_{i=1}^C p_i^2
-\)</span>$</p></li>
+\]</div>
+<ul class="simple">
 <li><p>Where, <span class="math notranslate nohighlight">\(C\)</span> is the number of unique classes in the dataset. <span class="math notranslate nohighlight">\(p_i\)</span> is the proportion of data sample belonging to class <span class="math notranslate nohighlight">\(i\)</span> in the Dataset <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
 </ul>
 </section>
